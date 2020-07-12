@@ -3,26 +3,20 @@
 {% block title %}Edit Tipo{% endblock %}
 
 {% block body %}
-<section class="breadcrumb-option set-bg" data-setbg="{{ asset('img/breadcrumb.jpg') }}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__text">
-                        <h2>Contacto</h2>
-                        <div class="breadcrumb__widget">
-                            <a href="/home">Inicio</a>
-                            <span>Contacto</span>
-                        </div>
-                    </div>
-                </div>
+{% include "section/section.html.twig" with {'descripcion':'Tipo Pista'} %}
+
+    <div class="container-fluid p-5">
+    <h1 class="text-center">Editar Tipo</h1>
+        <div class="row justify-content-center">
+            <div class="col-4">
+            <div class="classes__item__text">
+                {{ include('tipo/_form.html.twig', {'button_label': 'Actualizar'}) }}
+                {# {{ include('tipo/_delete_form.html.twig') }} #}
+                <a href="{{ path('tipo_index') }}" class="class-btn mt-2">Volver al listado</a>
+                
+            </div>
             </div>
         </div>
-    </section>
-    <h1>Edit Tipo</h1>
-
-    {{ include('tipo/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('tipo_index') }}">back to list</a>
-
-    {{ include('tipo/_delete_form.html.twig') }}
+    </div>
+    
 {% endblock %}

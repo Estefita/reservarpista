@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Club;
+use App\Entity\Jugador;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationFormClubType;
@@ -124,11 +125,13 @@ class RegistrationController extends AbstractController
     public function registerjugador(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
     {
         $user = new User(); 
+        $jugador = new Jugador();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
+            $user->setIsClub(false);
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
@@ -136,18 +139,36 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $nombre = $form->get('nombre')->getData();
+            $apellidos = $form->get('apellidos')->getData();
+            $direccion = $form->get('direccion')->getData();
+            $provincia = $form->get('provincia')->getData();
+            $poblacion = $form->get('poblacion')->getData();
+            $telefono = $form->get('telefono')->getData();
+
+            $jugador->setNombre($nombre);
+            $jugador->setApellidos($apellidos);
+            $jugador->setDireccion($direccion);
+            $jugador->setProvincia($provincia);
+            $jugador->setPoblacion($poblacion);
+            $jugador->setTelefono($telefono);
+
+            $user->setRoles(['ROLE_JUGADOR']);
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
+            $entityManager->persist($jugador);
+
+            $user->addJugador($jugador);
+            $entityManager->persist($user); 
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+           /*  $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('estefialora@hotmail.com', 'Booking track'))
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
+            ); */
             // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(

@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,18 +13,107 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Debes aceptar los términos.',
+                    ]),
+                ],
+            ])
+            ->add('nombre', TextType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor introduzca su nombre',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'El nombre debe tener {{ limit }} caracteres',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 30,
+                    ]),
+                ],
+            ])
+            ->add('apellidos', TextType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor introduzca sus apellidos',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'Los apellidos deben tener {{ limit }} caracteres',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 100,
+                    ]),
+                ],
+            ])
+            ->add('direccion', TextType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor introduzca la dirección del club',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'La dirección debe tener {{ limit }} caracteres',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 100,
+                    ]),
+                ],
+            ])
+            ->add('provincia', TextType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor introduzca la provincia del club',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'La provincia debe tener {{ limit }} caracteres',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 100,
+                    ]),
+                ],
+            ])
+            ->add('poblacion', TextType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor introduzca la poblacion del club',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'La población debe tener {{ limit }} caracteres',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 100,
+                    ]),
+                ],
+            ])
+            ->add('telefono', TelType::class, [
+                'mapped' => false,
+                //'attr' => ['style' => 'background: red'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor introduzca el teléfono del club',
+                    ]),
+                    new Length([
+                        'min' => 9,
+                        'minMessage' => 'El teléfono debe tener un mínimo de {{ limit }} números',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 12,
+                        'maxMessage' => 'El teléfono debe tener un máximo de {{ limit }} números',
                     ]),
                 ],
             ])

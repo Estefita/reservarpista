@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pista index{% endblock %}
+
+{% block body %}
+{% include "section/section.html.twig" with {'descripcion':'Pista'} %}
+    <h1>Pistas</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Tipo Pista</th>
+                <th>Deporte</th>
+                <th>Fecha creacion</th>
+                <th>Imagen</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pistum in pistas %}
+            <tr>
+                <td>{{ pistum.id }}</td>
+                <td>{{ pistum.nombre }}</td>
+                <td>{{ pistum.tipo }}</td>
+                <td>{{ pistum.deporte }}</td>
+                <td>{{ pistum.fechacreacion ? pistum.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ pistum.imagen }}</td>
+                <td>
+                    <a href="{{ path('pista_show', {'id': pistum.id}) }}">Ver</a>
+                    <a href="{{ path('pista_edit', {'id': pistum.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Pista no encontrada</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('pista_new') }}">Crear Nueva Pista</a>
+{% endblock %}

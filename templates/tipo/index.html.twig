@@ -1,32 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tipo index{% endblock %}
+{% block title %}Tipos de pista{% endblock %}
 
 {% block body %}
-<section class="breadcrumb-option set-bg" data-setbg="{{ asset('img/breadcrumb.jpg') }}">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__text">
-                        <h2>Contacto</h2>
-                        <div class="breadcrumb__widget">
-                            <a href="/home">Inicio</a>
-                            <span>Contacto</span>
-                        </div>
-                    </div>
-                </div>
+    {% include "section/section.html.twig" with {'descripcion':'Tipo Pista'} %}
+
+    <h3 class="text-center p-5">Detalle pista</h3>
+    {# {% for tipo in tipos %}
+    <div class="col-lg-4 col-md-6">
+        <div class="classes__item classes__item__page">
+            <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-3.jpg">
+                <span>Foto</span>
+            </div>
+            <div class="classes__item__text">                            
+                <h6>{{ tipo.nombre }}</h6>
+                <h6>{{ tipo.fechacreacion ? tipo.fechacreacion|date('Y-m-d H:i:s') : '' }}</h6>
+                <a href="#" class="class-btn">JOIN NOW</a> 
+                <a href="{{ path('tipo_show', {'id': tipo.id}) }}" class="class-btn">Ver</a>
+                <a href="{{ path('tipo_edit', {'id': tipo.id}) }}" class="class-btn">Editar</a>
+               
             </div>
         </div>
-    </section>
-    <h1>Tipo index</h1>
-    
-    <table class="table">
+    </div>
+     {% else %}
+            <tr>
+                <td colspan="4">No encontrado</td>
+            </tr>
+    {% endfor %} #}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-11">
+                <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nombre</th>
-                <th>Fechacreacion</th>
-                <th>actions</th>
+                <th>Fecha Alta</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -36,17 +46,25 @@
                 <td>{{ tipo.nombre }}</td>
                 <td>{{ tipo.fechacreacion ? tipo.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('tipo_show', {'id': tipo.id}) }}">show</a>
-                    <a href="{{ path('tipo_edit', {'id': tipo.id}) }}">edit</a>
+                    <div class="classes__item__text p-0">
+                        <a href="{{ path('tipo_show', {'id': tipo.id}) }}" class="class-btn">Ver</a>
+                        <a href="{{ path('tipo_edit', {'id': tipo.id}) }}" class="class-btn">Editar</a>
+                        <a href="{{ path('tipo_delete', {'id': tipo.id}) }}" class="class-btn btn-danger"><span class="text-white">Borrar</span></a>
+                    </div>
                 </td>
             </tr>
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>
             </tr>
-        {% endfor %}
+        {% endfor %} 
         </tbody>
     </table>
-
-    <a href="{{ path('tipo_new') }}">Create new</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="classes__item__text">  
+        <a href="{{ path('tipo_new') }}" class="class-btn">Crear nuevo tipo</a>
+    </div>
 {% endblock %}

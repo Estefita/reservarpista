@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\TipoRepository;
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,6 +29,17 @@ class Tipo
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $fechacreacion;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Pista::class, mappedBy="tipo")
+     */
+    private $pistas;
+
+    public function __construct()
+    {
+        $this->setFechacreacion(new DateTime());
+        $this->pistas = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -54,5 +68,41 @@ class Tipo
         $this->fechacreacion = $fechacreacion;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Pista[]
+     */
+    public function getPistas(): Collection
+    {
+        return $this->pistas;
+    }
+
+    public function addPista(Pista $pista): self
+    {
+        if (!$this->pistas->contains($pista)) {
+            $this->pistas[] = $pista;
+            $pista->setTipo($this);
+        }
+
+        return $this;
+    }
+
+    public function removePista(Pista $pista): self
+    {
+        if ($this->pistas->contains($pista)) {
+            $this->pistas->removeElement($pista);
+            // set the owning side to null (unless already changed)
+            if ($pista->getTipo() === $this) {
+                $pista->setTipo(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 }

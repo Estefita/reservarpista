@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PistaRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +38,22 @@ class Pista
      * @ORM\JoinColumn(nullable=false)
      */
     private $deporte;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Tipo::class, inversedBy="pistas")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $tipo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Club::class, inversedBy="pista")
+     */
+    private $club;
+
+    public function __construct()
+    {
+        $this->setFechacreacion(new DateTime());
+    }
 
     public function getId(): ?int
     {
@@ -87,6 +104,30 @@ class Pista
     public function setDeporte(?Deporte $deporte): self
     {
         $this->deporte = $deporte;
+
+        return $this;
+    }
+
+    public function getTipo(): ?Tipo
+    {
+        return $this->tipo;
+    }
+
+    public function setTipo(?Tipo $tipo): self
+    {
+        $this->tipo = $tipo;
+
+        return $this;
+    }
+
+    public function getClub(): ?Club
+    {
+        return $this->club;
+    }
+
+    public function setClub(?Club $club): self
+    {
+        $this->club = $club;
 
         return $this;
     }

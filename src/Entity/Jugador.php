@@ -54,6 +54,11 @@ class Jugador
      */
     private $fechacreacion;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $nombre;
+
    public function __construct()
    {
        $this->setFechacreacion(new DateTime());
@@ -144,6 +149,18 @@ class Jugador
     public function setFechacreacion(\DateTimeInterface $fechacreacion): self
     {
         $this->fechacreacion = $fechacreacion;
+
+        return $this;
+    }
+
+    public function getNombre(): ?string
+    {
+        return $this->nombre;
+    }
+
+    public function setNombre(string $nombre): self
+    {
+        $this->nombre = $nombre;
 
         return $this;
     }

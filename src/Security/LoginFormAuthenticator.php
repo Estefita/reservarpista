@@ -3,6 +3,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,13 +31,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     private $urlGenerator;
     private $csrfTokenManager;
     private $passwordEncoder;
+    private $userRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepository)
     {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
+        $this->userRepository = $userRepository;
     }
 
     public function supports(Request $request)
@@ -92,14 +95,30 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        dump($request);
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
-        }  
-        if($request->attributes->get('_route') == 'app_club_register'){
+        if($request->attributes->get('_route') == 'app_jugador_register'){
             return new RedirectResponse($this->urlGenerator->generate('home'));
             //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         } 
+
+        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+            return new RedirectResponse($targetPath);
+        } 
+        
+        if($request->attributes->get('_route') == 'app_club_register'){
+            return new RedirectResponse($this->urlGenerator->generate('pista_index'));
+            //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        } 
+
+        $email = $request->request->get('email');
+        /** 
+         * @var User $user
+         */
+        $user = $this->userRepository->findBy(['email'=> $email]);
+        $isClub = $user[0]->getIsClub();
+         
+        if($isClub){
+            return new RedirectResponse($this->urlGenerator->generate('pista_index'));
+        }
         return new RedirectResponse($this->urlGenerator->generate('home'));
         
     }

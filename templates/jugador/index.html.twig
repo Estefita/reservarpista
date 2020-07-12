@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jugador index{% endblock %}
+
+{% block body %}
+{% include "section/section.html.twig" with {'descripcion':'Jugador'} %}
+    <h1>Jugador</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Direccion</th>
+                <th>Provincia</th>
+                <th>Poblacion</th>
+                <th>Telefono</th>
+                <th>Fecha creacion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for jugador in jugadors %}
+            <tr>
+                <td>{{ jugador.id }}</td>
+                <td>{{ jugador.nombre }}</td>
+                <td>{{ jugador.apellidos }}</td>
+                <td>{{ jugador.direccion }}</td>
+                <td>{{ jugador.provincia }}</td>
+                <td>{{ jugador.poblacion }}</td>
+                <td>{{ jugador.telefono }}</td>
+                <td>{{ jugador.fechacreacion ? jugador.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('jugador_show', {'id': jugador.id}) }}">Ver</a>
+                    <a href="{{ path('jugador_edit', {'id': jugador.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">Jugador no encontrado</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('jugador_new') }}">Crear Nuevo Jugador</a>
+{% endblock %}

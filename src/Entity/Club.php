@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ClubRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,9 +66,15 @@ class Club
      */
     private $fechacreacion;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Pista::class, mappedBy="club")
+     */
+    private $pista;
+
     public function __construct()
     {
-        $this->fechacreacion = new DateTime(); 
+        $this->fechacreacion = new DateTime();
+        $this->pista = new ArrayCollection(); 
     }
 
     public function getId(): ?int
@@ -178,6 +186,37 @@ class Club
     public function setFechacreacion(\DateTimeInterface $fechacreacion): self
     {
         $this->fechacreacion = $fechacreacion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pista[]
+     */
+    public function getPista(): Collection
+    {
+        return $this->pista;
+    }
+
+    public function addPistum(Pista $pistum): self
+    {
+        if (!$this->pista->contains($pistum)) {
+            $this->pista[] = $pistum;
+            $pistum->setClub($this);
+        }
+
+        return $this;
+    }
+
+    public function removePistum(Pista $pistum): self
+    {
+        if ($this->pista->contains($pistum)) {
+            $this->pista->removeElement($pistum);
+            // set the owning side to null (unless already changed)
+            if ($pistum->getClub() === $this) {
+                $pistum->setClub(null);
+            }
+        }
 
         return $this;
     }

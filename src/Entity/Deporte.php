@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\DeporteRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -42,6 +43,7 @@ class Deporte
     public function __construct()
     {
         $this->pistas = new ArrayCollection();
+        $this->setFechacreacion(new DateTime());
     }
 
     public function getId(): ?int
@@ -114,5 +116,10 @@ class Deporte
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getNombre();
     }
 }
