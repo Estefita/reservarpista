@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\JugadorRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -48,7 +49,15 @@ class Jugador
      */
     private $user;
 
-   
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $fechacreacion;
+
+   public function __construct()
+   {
+       $this->setFechacreacion(new DateTime());
+   }
 
     public function getId(): ?int
     {
@@ -123,6 +132,18 @@ class Jugador
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFechacreacion(): ?\DateTimeInterface
+    {
+        return $this->fechacreacion;
+    }
+
+    public function setFechacreacion(\DateTimeInterface $fechacreacion): self
+    {
+        $this->fechacreacion = $fechacreacion;
 
         return $this;
     }

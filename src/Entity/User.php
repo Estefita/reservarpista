@@ -53,6 +53,11 @@ class User implements UserInterface
      */
     private $isVerified = false;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isClub = false;
+
     public function __construct()
     {
         $this->clubs = new ArrayCollection();
@@ -207,6 +212,18 @@ class User implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getIsClub(): ?bool
+    {
+        return $this->isClub;
+    }
+
+    public function setIsClub(bool $isClub): self
+    {
+        $this->isClub = $isClub;
 
         return $this;
     }

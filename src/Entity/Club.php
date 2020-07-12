@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ClubRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,6 +58,16 @@ class Club
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $fechacreacion;
+
+    public function __construct()
+    {
+        $this->fechacreacion = new DateTime(); 
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +166,18 @@ class Club
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getFechacreacion(): ?\DateTimeInterface
+    {
+        return $this->fechacreacion;
+    }
+
+    public function setFechacreacion(\DateTimeInterface $fechacreacion): self
+    {
+        $this->fechacreacion = $fechacreacion;
 
         return $this;
     }

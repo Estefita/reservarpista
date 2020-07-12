@@ -25,6 +25,27 @@
     <div class="col-6 p-5">
         <h1 class="text-center">Registrar</h1>
         {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.nomres, {
+                label: 'Nombre responsable:'    
+            }) }}
+            {{ form_row(registrationForm.nomclub, {
+                label: 'Nombre Club:'    
+            }) }}
+            {{ form_row(registrationForm.web, {
+                label: 'Web Club:'    
+            }) }}
+            {{ form_row(registrationForm.direccion, {
+                label: 'Dirección:'    
+            }) }}
+            {{ form_row(registrationForm.provincia, {
+                label: 'Provincia:'    
+            }) }}
+            {{ form_row(registrationForm.poblacion, {
+                label: 'Población:'    
+            }) }}
+            {{ form_row(registrationForm.telefono, {
+                label: 'Teléfono:'    
+            }) }}
             {{ form_row(registrationForm.email) }}
             {{ form_row(registrationForm.plainPassword, {
                 label: 'Password'
