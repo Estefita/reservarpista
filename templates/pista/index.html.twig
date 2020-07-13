@@ -1,44 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Pista index{% endblock %}
+{% block title %}
+	Listado de Pistas
+{% endblock %}
 
 {% block body %}
-{% include "section/section.html.twig" with {'descripcion':'Pista'} %}
-    <h1>Pistas</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Tipo Pista</th>
-                <th>Deporte</th>
-                <th>Fecha creacion</th>
-                <th>Imagen</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for pistum in pistas %}
-            <tr>
-                <td>{{ pistum.id }}</td>
-                <td>{{ pistum.nombre }}</td>
-                <td>{{ pistum.tipo }}</td>
-                <td>{{ pistum.deporte }}</td>
-                <td>{{ pistum.fechacreacion ? pistum.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ pistum.imagen }}</td>
-                <td>
-                    <a href="{{ path('pista_show', {'id': pistum.id}) }}">Ver</a>
-                    <a href="{{ path('pista_edit', {'id': pistum.id}) }}">Editar</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Pista no encontrada</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('pista_new') }}">Crear Nueva Pista</a>
+	{% include "section/section.html.twig" with {'descripcion':'Pista'} %}
+	<h3 class="text-center p-5">Pistas</h3>
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-11">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Tipo Pista</th>
+							<th>Deporte</th>
+							<th>Fecha Alta</th>
+							<th>Imagen</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for pistum in pistas %}
+							<tr>
+								<td>{{ pistum.id }}</td>
+								<td>{{ pistum.nombre }}</td>
+								<td>{{ pistum.tipo }}</td>
+								<td>{{ pistum.deporte }}</td>
+								<td>{{ pistum.fechacreacion ? pistum.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
+								<td>{{ pistum.imagen }}</td>
+								<td>
+									<div class="classes__item__text p-0">
+										<div class="row">
+											<div class="col-2">
+												<a href="{{ path('pista_show', {'id': pistum.id}) }}" class="class-btn">Ver</a>
+											</div>
+											<div class="col-2">
+												<a href="{{ path('pista_edit', {'id': pistum.id}) }}" class="class-btn">Editar</a>
+											</div>
+											<div class="col-2 ml-3">
+												{{ include('pista/_delete_form.html.twig') }}
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="5">Pista no encontrada</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="classes__item__text">
+		<a href="{{ path('pista_new') }}" class="class-btn">Crear Nueva Pista</a>
+	</div>
 {% endblock %}

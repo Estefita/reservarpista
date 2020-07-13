@@ -193,7 +193,7 @@ class Club
     /**
      * @return Collection|Pista[]
      */
-    public function getPista(): Collection
+    public function getPista()
     {
         return $this->pista;
     }

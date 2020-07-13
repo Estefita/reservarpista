@@ -31,19 +31,23 @@
                     <div class="col-lg-9 col-md-9">
                         <nav class="header__menu">
                             <ul>
-                                <li><a href="/home">Inicio</a></li>
-                                <li><a href="/club">Clubs</a></li>
-                                <li><a href="/contacto">Contacto</a></li>
-                                <li><a href="#">Mantenimiento</a>
-                                    <ul class="dropdown">
-                                        {# <li><a href="./classes-details.html">Monitores</a></li> #}
-                                        <li><a href="{# {{ path('jugador_index') }} #}">Jugadores</a></li>
-                                        <li><a href="{{ path('club') }}">Clubs</a></li>
-                                        <li><a href="{{ path('deporte_index') }}">Deportes</a></li>
-                                        <li><a href="{{ path('pista_index') }}">Pistas</a></li>
-                                        <li><a href="{{ path('tipo_index') }}">Tipos de Pistas</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{ path('home') }}">Inicio</a></li>
+                                <li><a href="{{ path('club') }}">Clubs</a></li>
+                                <li><a href="{{ path('contacto') }}">Contacto</a></li>
+
+                                {% if is_granted ('ROLE_ADMIN')  %}
+                                    <li><a href="#">Mantenimiento</a>
+                                        <ul class="dropdown">
+                                            {# <li><a href="./classes-details.html">Monitores</a></li> #}
+                                            <li><a href="{{ path('jugador_index') }}">Jugadores</a></li>
+                                            <li><a href="{{ path('club') }}">Clubs</a></li>
+                                            <li><a href="{{ path('deporte_index') }}">Deportes</a></li>
+                                            <li><a href="{{ path('pista_index') }}">Pistas</a></li>
+                                            <li><a href="{{ path('tipo_index') }}">Tipos de Pistas</a></li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+
                                 {# <li><a href="./contact.html">Acceso a usuarios</a></li> #}
                             </ul>
                         </nav>

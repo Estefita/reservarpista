@@ -1,222 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ClubController!{% endblock %}
+{% block title %}Club index{% endblock %}
 
 {% block body %}
+    <h1>Club index</h1>
 
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-    <!-- Breadcrumb Begin -->
-        {% include "section/section.html.twig" with {'descripcion':'Clubs'} %}
-    <!-- Breadcrumb End -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomres</th>
+                <th>Nomclub</th>
+                <th>Direccion</th>
+                <th>Telefono</th>
+                <th>Web</th>
+                <th>Provincia</th>
+                <th>Poblacion</th>
+                <th>Fechacreacion</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for club in clubs %}
+            <tr>
+                <td>{{ club.id }}</td>
+                <td>{{ club.nomres }}</td>
+                <td>{{ club.nomclub }}</td>
+                <td>{{ club.direccion }}</td>
+                <td>{{ club.telefono }}</td>
+                <td>{{ club.web }}</td>
+                <td>{{ club.provincia }}</td>
+                <td>{{ club.poblacion }}</td>
+                <td>{{ club.fechacreacion ? club.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('club_show', {'id': club.id}) }}">show</a>
+                    <a href="{{ path('club_edit', {'id': club.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    <!-- Classes Section Begin -->
-    <section class="classes spad">
-        <div class="container">
-            <div class="classes__filter">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <form action="#">
-                            <div class="class__filter__select">
-                                <p>Filter By Day:</p>
-                                <select>
-                                    <option>All</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                </select>
-                            </div>
-                            <div class="class__filter__select">
-                                <p>Level:</p>
-                                <select>
-                                    <option>All Levels</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                </select>
-                            </div>
-                            <div class="class__filter__select">
-                                <p>Teacher:</p>
-                                <select>
-                                    <option>All Teachers</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                </select>
-                            </div>
-                            <div class="class__filter__select">
-                                <p>Style:</p>
-                                <select>
-                                    <option>All Styles</option>
-                                    <option>Option 1</option>
-                                    <option>Option 2</option>
-                                    <option>Option 3</option>
-                                </select>
-                            </div>
-                            <div class="class__filter__btn">
-                                <button><i class="fa fa-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-1.jpg">
-                            <span>Beginer</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">100 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="/detalle" class="class-btn">Detalle</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-2.jpg">
-                            <span>All levels</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">200 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="#" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-3.jpg">
-                            <span>Beginer</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">300 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="#" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-4.jpg">
-                            <span>Beginer</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">100 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="#" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-5.jpg">
-                            <span>All levels</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">200 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="#" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-6.jpg">
-                            <span>Beginer</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">300 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="#" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-7.jpg">
-                            <span>Beginer</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">100 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="#" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-8.jpg">
-                            <span>All levels</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">200 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="detalle.html.twig" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="classes__item classes__item__page">
-                        <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-9.jpg">
-                            <span>Beginer</span>
-                        </div>
-                        <div class="classes__item__text">
-                            <ul>
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <h4><a href="#">300 Hour Yoga Course Rishikesh</a></h4>
-                            <h6>Jordan Lawson <span>- Yoga Teacher</span></h6>
-                            <a href="#" class="class-btn">JOIN NOW</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="classes__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#"><span class="arrow_carrot-right"></span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Classes Section End -->
-
+    <a href="{{ path('club_new') }}">Create new</a>
 {% endblock %}

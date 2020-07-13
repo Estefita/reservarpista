@@ -4,7 +4,7 @@
 
 {% block body %}
 {% include "section/section.html.twig" with {'descripcion':'Jugador'} %}
-    <h1>Jugador</h1>
+    <h3 class="text-center">Jugador</h3>
 
     <table class="table">
         <tbody>
@@ -37,15 +37,14 @@
                 <td>{{ jugador.telefono }}</td>
             </tr>
             <tr>
-                <th>Fechacreacion</th>
+                <th>Fecha creacion</th>
                 <td>{{ jugador.fechacreacion ? jugador.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('jugador_index') }}">back to list</a>
-
-    <a href="{{ path('jugador_edit', {'id': jugador.id}) }}">edit</a>
-
-    {{ include('jugador/_delete_form.html.twig') }}
+<div class="classes__item__text">
+    <a href="{{ path('jugador_index') }}" class="class-btn">Volver al listado</a>
+    <a href="{{ path('jugador_edit', {'id': jugador.id}) }}" class="class-btn">Editar</a>
+</div>
+    {# {{ include('jugador/_delete_form.html.twig') }} #}
 {% endblock %}

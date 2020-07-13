@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Editar Jugador{% endblock %}
+{% block title %}Editar Jugador
+{% endblock %}
 
 {% block body %}
-{% include "section/section.html.twig" with {'descripcion':'Jugador'} %}
-    <h1>Editar Jugador</h1>
+	{% include "section/section.html.twig" with {'descripcion':'Jugador'} %}
+	<div class="container-fluid p-5">
+		<h3 class="text-center">Editar Jugador</h3>
+		<div class="row justify-content-center">
+			<div class="col-4">
+				<div class="classes__item__text">
+					{{ include('jugador/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
-    {{ include('jugador/_form.html.twig', {'button_label': 'Actualizar'}) }}
-
-    <a href="{{ path('jugador_index') }}">Volver al listado</a>
-
-    {{ include('jugador/_delete_form.html.twig') }}
+					<a href="{{ path('jugador_index') }}" class="class-btn mt-2">Volver al listado</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	{# {{ include('jugador/_delete_form.html.twig') }} #}
 {% endblock %}

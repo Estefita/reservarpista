@@ -1,40 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Deporte index{% endblock %}
+{% block title %}Deporte{% endblock %}
 
 {% block body %}
-{% include "section/section.html.twig" with {'descripcion':'Deporte'} %}
-    <h1>Deporte index</h1>
+	{% include "section/section.html.twig" with {'descripcion':'Deporte'} %}
+	<div class="container-fluid p-5">
+		<h3 class="text-center">Deporte</h3>
+		<div class="row justify-content-center">
+			<div class="col-11">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Imagen</th>
+							<th>Fecha Alta</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for deporte in deportes %}
+							<tr>
+								<td>{{ deporte.id }}</td>
+								<td>{{ deporte.nombre }}</td>
+								<td>{{ deporte.imagen }}</td>
+								<td>{{ deporte.fechacreacion ? deporte.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
+								<td>
+									<div class="classes__item__text p-0">
+										<a href="{{ path('deporte_show', {'id': deporte.id}) }}" class="class-btn">Ver</a>
+										<a href="{{ path('deporte_edit', {'id': deporte.id}) }}" class="class-btn">Editar</a>
+										<a href="{{ path('deporte_delete', {'id': deporte.id}) }}" class="class-btn btn-danger">
+											<span class="text-white">Borrar</span>
+										</a>
+									</div>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="5">Deporte no encontrado</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Imagen</th>
-                <th>Fecha creacion</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for deporte in deportes %}
-            <tr>
-                <td>{{ deporte.id }}</td>
-                <td>{{ deporte.nombre }}</td>
-                <td>{{ deporte.imagen }}</td>
-                <td>{{ deporte.fechacreacion ? deporte.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('deporte_show', {'id': deporte.id}) }}">Ver</a>
-                    <a href="{{ path('deporte_edit', {'id': deporte.id}) }}">Editar</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">Deporte no encontrado</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('deporte_new') }}">Crear Nuevo Deporte</a>
+	<div class="classes__item__text">
+		<a href="{{ path('deporte_new') }}" class="class-btn">Crear Nuevo Deporte</a>
+	</div>
 {% endblock %}

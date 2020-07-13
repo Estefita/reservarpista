@@ -1,13 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Deporte{% endblock %}
+{% block title %}Nuevo Deporte{% endblock %}
 
 {% block body %}
-{% include "section/section.html.twig" with {'descripcion':'Deporte'} %}
-
-    <h1>Crear Nuevo Deporte</h1>
-
-    {{ include('deporte/_form.html.twig') }}
-
-    <a href="{{ path('deporte_index') }}">back to list</a>
+	{% include "section/section.html.twig" with {'descripcion':'Deporte'} %}
+	<div class="container-fluid p-5">
+		<h3 class="text-center">Crear Nuevo Deporte</h3>
+		<div class="row justify-content-center">
+			<div class="col-4">
+				{{ include('deporte/_form.html.twig') }}
+				<div class="classes__item__text pl-0 text-center">
+					<a href="{{ path('deporte_index') }}">Volver al listado</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

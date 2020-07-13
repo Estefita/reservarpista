@@ -113,8 +113,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         /** 
          * @var User $user
          */
-        $user = $this->userRepository->findBy(['email'=> $email]);
-        $isClub = $user[0]->getIsClub();
+        $user = $this->userRepository->findBy(['email'=> $email])[0];
+        $isClub = $user->getIsClub();
          
         if($isClub){
             return new RedirectResponse($this->urlGenerator->generate('pista_index'));

@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use App\Entity\User;
+use App\Entity\Club;
 use App\Entity\Pista;
 use App\Form\PistaType;
 use App\Repository\PistaRepository;
@@ -12,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/pista")
+ * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_CLUB')")
  */
 class PistaController extends AbstractController
 {
@@ -20,8 +25,21 @@ class PistaController extends AbstractController
      */
     public function index(PistaRepository $pistaRepository): Response
     {
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        /**
+         * @var Club $club
+         */
+        $club = $user->getClubs();
+        $pistas = [];
+        if($club){
+            $pistas = $club->getPista();
+        }
         return $this->render('pista/index.html.twig', [
-            'pistas' => $pistaRepository->findAll(),
+            'pistas' => $pistas,
         ]);
     }
 
@@ -30,12 +48,22 @@ class PistaController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        /**
+         * @var User $user
+         */
+        $user = $this->getUser();
+
+        /**
+         * @var Club $club
+         */
+        $club = $user->getClubs();
         $pistum = new Pista();
         $form = $this->createForm(PistaType::class, $pistum);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $club->addPistum($pistum);
             $entityManager->persist($pistum);
             $entityManager->flush();
 
@@ -80,6 +108,7 @@ class PistaController extends AbstractController
 
     /**
      * @Route("/{id}", name="pista_delete", methods={"DELETE"})
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function delete(Request $request, Pista $pistum): Response
     {

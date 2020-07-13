@@ -145,9 +145,9 @@ class User implements UserInterface
     /**
      * @return Collection|Club[]
      */
-    public function getClubs(): Collection
+    public function getClubs()
     {
-        return $this->clubs;
+        return $this->clubs[0];
     }
 
     public function addClub(Club $club): self
