@@ -176,9 +176,9 @@ class User implements UserInterface
     /**
      * @return Collection|Jugador[]
      */
-    public function getJugadors(): Collection
+    public function getJugadors()
     {
-        return $this->jugadors;
+        return $this->jugadors[0];
     }
 
     public function addJugador(Jugador $jugador): self

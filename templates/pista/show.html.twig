@@ -4,9 +4,33 @@
 
 {% block body %}
 	{% include "section/section.html.twig" with {'descripcion':'Pista'} %}
-
-	<h3>Pista</h3>
-	<table class="table">
+	<div class="container-fluid p-5">
+	<h3 class="text-center">Pista</h3>
+	<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6">
+                <div class="classes__item classes__item__page">
+                    <div class="classes__item__pic set-bg" data-setbg="img/classes/classes-3.jpg">
+                        <span>Foto</span>
+                    </div>                            
+                    <h6>Nombre: {{ pistum.nombre }}</h6>
+                    <h6>Fecha creación: {{ pistum.fechacreacion ? pistum.fechacreacion|date('Y-m-d H:i:s') : '' }}</h6>
+                  
+                    <div class="classes__item__text p-0 mt-2">
+                        <div class="row">
+                            <div class="col-4"> 
+                                <a href="{{ path('pista_edit', {'id': pistum.id}) }}" class="class-btn">Editar</a>
+                            </div>
+                            <div class="col-4">
+                                {{ include('pista/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                        <a href="{{ path('pista_index') }}" class="class-btn text-nowrap mt-2">Volver al listado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	{# <table class="table">
 		<tbody>
 			<tr>
 				<th>Id</th>
@@ -29,6 +53,6 @@
 	<div class="classes__item__text">
 		<a href="{{ path('pista_index') }}">Volver a listado</a>
 		<a href="{{ path('pista_edit', {'id': pistum.id}) }}" class="class-btn">Editar</a>
-	</div>
+	</div> #}
 	{# {{ include('pista/_delete_form.html.twig') }} #}
 {% endblock %}

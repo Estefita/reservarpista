@@ -3,9 +3,10 @@
 {% block title %}Edit Club{% endblock %}
 
 {% block body %}
+{% include "section/section.html.twig" with {'descripcion':'Club'} %}
     <h1>Edit Club</h1>
 
-    {{ include('club/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('club/_form.html.twig', {'button_label': 'Actualizar'}) }}
 
     <a href="{{ path('club_index') }}">back to list</a>
 

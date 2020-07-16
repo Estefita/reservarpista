@@ -71,6 +71,11 @@ class Club
      */
     private $pista;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descripcion;
+
     public function __construct()
     {
         $this->fechacreacion = new DateTime();
@@ -219,5 +224,32 @@ class Club
         }
 
         return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(?string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
+
+        return $this;
+    }
+
+    public function getAvatarUrl(int $size = null): string
+    {
+        $url = 'https://robohash.org/'.$this->getNomres();
+
+ 
+
+        if ($size) {
+            $url .= sprintf('?size=%dx%d', $size, $size);
+        }
+
+ 
+
+        return $url;
     }
 }

@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Club index
+{% block title %}Hello WebController!
 {% endblock %}
 
 {% block body %}
-	{% include "section/section.html.twig" with {'descripcion':'Club'} %}
+	{% include "section/section.html.twig" with {'descripcion':'Listado de Clubs'} %}
 	<section class="classes spad">
         <div class="container">
             <div class="classes__filter">
@@ -54,70 +54,39 @@
                     </div>
                 </div>
             </div>
-	<div class="container-fluid p-5">
-		<h3 class="text-center">Clubs</h3>
-		{# <div class="justify-content-center"> #}
-		{# <div> #}
-		<table class="table">
-			<thead>
-				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Resp.</th>
-					<th scope="col">Club</th>
-					<th scope="col">Descripción</th>
-					<th scope="col">Direccion</th>
-					<th scope="col">Telefono</th>
-					<th scope="col">Web</th>
-					<th scope="col">Provincia</th>
-					<th scope="col">Poblacion</th>
-					<th scope="col">Fecha creación</th>
-					<th scope="col">Acciones</th>
-				</tr>
-			</thead>
-			<tbody>
+	<section class="classes spad">
+		<div class="container">
+			<div class="row">
 				{% for club in clubs %}
-					<tr>						
-						<td>{{ club.id }}</td>
-						<td>{{ club.nomres }}</td>
-						<td>{{ club.nomclub }}</td>
-						<td>
-							<span class="d-inline-block text-truncate" style="max-width: 100px;">{{club.descripcion}}</span>
-						</td>
-						<td>{{ club.direccion}}</td>
-						<td>{{ club.telefono }}</td>
-						<td>{{ club.web }}</td>
-						<td>{{ club.provincia }}</td>
-						<td>{{ club.poblacion }}</td>
-						<td>{{ club.fechacreacion ? club.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
-						<td>
-							<div class="classes__item__text p-0">
-								<div class="row">
-									<div class="col-3">
-										<a href="{{ path('club_show', {'id': club.id}) }}" class="btn btn-sm btn-primary">
-											<i class="fa fa-eye"></i>
-										</a>
-									</div>
-									<div class="col-3">
-										<a href="{{ path('club_edit', {'id': club.id}) }}" class="btn btn-sm btn-warning">
-											<i class="fa fa-pencil-square-o"></i>
-										</a>
-									</div>
-									<div class="col-3">
-										{{ include('club/_delete_form.html.twig') }}
-									</div>
-								</div>
+					<div class="col-lg-4 col-md-6">
+						<div class="classes__item classes__item__page">
+							<div class="classes__item__pic set-bg" data-setbg="img/classes/classes-1.jpg">
+								<span>Foto</span>
 							</div>
-						</td>
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="10">Club no encontrado</td>
-					</tr>
+							<div class="classes__item__text">
+								<ul>
+									<li>
+										<span class="icon_calendar"></span>
+										{{ club.nomres }}</li>
+									<li>
+										<span class="icon_clock_alt"></span>
+										{{ club.nomclub }}</li>
+									<li>
+										<span class="icon_clock_alt"></span>
+										{{ club.web }}</li>
+								</ul>
+								<h4>
+									<a href="#">100 Hour Yoga Course Rishikesh</a>
+								</h4>
+								<h6>Jordan Lawson
+									<span>- Yoga Teacher</span>
+								</h6>
+                                <a href="{{ path('app_club_show', {'id': club.id}) }}">Detalle</a>
+							</div>
+						</div>
+					</div>
 				{% endfor %}
-			</tbody>
-		</table>
-		<div class="classes__item__text">
-			<a href="{{ path('club_new') }}" class="class-btn">Crear Nuevo Club</a>
+			</div>
 		</div>
-	</div>
-	{% endblock %}
+	</section>
+{% endblock %}

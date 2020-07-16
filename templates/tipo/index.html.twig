@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Tipos de pista{% endblock %}
+{% block title %}Tipos de Pista{% endblock %}
 
 {% block body %}
 	{% include "section/section.html.twig" with {'descripcion':'Tipo Pista'} %}
@@ -25,12 +25,17 @@
 								<td>{{ tipo.fechacreacion ? tipo.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
 								<td>
 									<div class="classes__item__text p-0">
-										<a href="{{ path('tipo_show', {'id': tipo.id}) }}" class="class-btn">Ver</a>
-										<a href="{{ path('tipo_edit', {'id': tipo.id}) }}" class="class-btn">Editar</a>
-										{{ include('tipo/_delete_form.html.twig') }}
-										{# <a href="{{ path('tipo_delete', {'id': tipo.id}) }}" class="class-btn btn-danger">
-											<span class="text-white">Borrar</span>
-										</a> #}
+										<div class="row">
+											<div class="col-2">
+												<a href="{{ path('tipo_show', {'id': tipo.id}) }}" class="class-btn">Ver</a>
+											</div>
+											<div class="col-2">
+												<a href="{{ path('tipo_edit', {'id': tipo.id}) }}" class="class-btn">Editar</a>
+											</div>
+											<div class="col-2 ml-3">
+												{{ include('tipo/_delete_form.html.twig') }}
+											</div>
+										</div>
 									</div>
 								</td>
 							</tr>

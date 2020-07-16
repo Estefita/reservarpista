@@ -109,6 +109,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
             //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         } 
 
+        if($request->attributes->get('_route') == 'app_admin'){
+            return new RedirectResponse($this->urlGenerator->generate('home'));
+            //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        }
+
         $email = $request->request->get('email');
         /** 
          * @var User $user

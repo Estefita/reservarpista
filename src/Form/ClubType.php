@@ -14,6 +14,7 @@ class ClubType extends AbstractType
         $builder
             ->add('nomres')
             ->add('nomclub')
+            ->add('descripcion')
             ->add('direccion')
             ->add('telefono')
             ->add('web')

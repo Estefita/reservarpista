@@ -1,67 +1,130 @@
-   
-   <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-3">
-                        <div class="header__logo">
-                            <a href="./index.html"><img src="{{ asset('img/logo.png') }}" alt=""></a>
-                        </div>
-                    </div>
-                    <div class="col-lg-9 col-md-9">
-                        <div class="header__top__widget">
-                            {# <ul>
-                                <li>CALL US: + 1 800-567-8990</li>
-                                <li>WRITE US: OFFICE@EXAMPLE.COM</li>
-                                <li>OPENING TIMES: MON - FRI: 9:00 - 19:00</li>
-                            </ul> #}
-                            <a href="/login" class="primary-btn">Acceder</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="canvas__open">
-                    <i class="fa fa-bars"></i>
-                </div>
-            </div>
-        </div>
-        <div class="header__nav">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-9 col-md-9">
-                        <nav class="header__menu">
-                            <ul>
-                                <li><a href="{{ path('home') }}">Inicio</a></li>
-                                <li><a href="{{ path('club') }}">Clubs</a></li>
-                                <li><a href="{{ path('contacto') }}">Contacto</a></li>
+<!-- Header Section Begin -->
+<header class="header">
+	<div class="header__top">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-3">
+					<div class="header__logo">
+						<a href="./index.html"><img src="{{ asset('img/logo.png') }}" alt=""></a>
+					</div>
+				</div>
+				<div class="col-lg-9 col-md-9">
+					<div class="header__top__widget">
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							{# Este if significa: esta logueado? #}
+							{% if app.user.clubs|default %}
+								{# es un club?, el default se utiliza como un hack para evitar usar el 'is defined' #}
+								<div class="row justify-content-end">
+									<div class="col-1">
+										<div class="rounded-circle border border-dark"><img src="{{app.user.clubs.avatarurl(80)}}" height="50" /></div>
+									</div>
+									<div class="col-2">
+										<a href="/login" class="primary-btn">{{ app.user.clubs.nomres }}</a>
+									</div>
+									<div class="col-2">
+										<a href="/logout" class="primary-btn">Logout</a>
+									</div>
+								</div>
+							{% endif %}
+							{# si no es un club, pasará como jugador #}
+							{% if app.user.jugadors|default %}
+								<div class="row">
+									{# <div class="col-3">
+										<div class="rounded-circle border border-dark"><img src="{{app.user.jugadors.avatarurl(60)}}"/></div>
+									</div> #}
+									<div class="col-3">
+										<a href="/login" class="primary-btn">{{ app.user.jugadors.nombre }}</a>
+									</div>
+									<div class="col-3">
+										<a href="/logout" class="primary-btn">Logout</a>
+									</div>
+								</div>
+								{# <div class="rounded-circle"><img src="{{app.user.jugadors.avatarurl(60)}}" /></div>
+															    <a href="/login" class="primary-btn">{{ app.user.jugadors.nombre }}</a>
+								                                <a href="/logout" class="primary-btn">Logout</a> #}
+							{%  endif %}
+							{% if is_granted('ROLE_ADMIN') %}
+								<a href="/login" class="primary-btn">{{ app.user.email }}</a>
+								<a href="/logout" class="primary-btn">Logout</a>
+							{%  endif %}
+						{%  else %}
+							{# aquí el usuario ya no está logueado #}
+							<a href="/login" class="primary-btn">Acceder</a>
+						{%  endif %}
+					</div>
+				</div>
+			</div>
+			<div class="canvas__open">
+				<i class="fa fa-bars"></i>
+			</div>
+		</div>
+	</div>
+	<div class="header__nav">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 col-md-9">
+					<nav class="header__menu">
+						<ul>
+							<li>
+								<a href="{{ path('home') }}">Inicio</a>
+							</li>
+							<li>
+								<a href="{{ path('app_club_list') }}">Clubs</a>
+							</li>
+							<li>
+								<a href="{{ path('pista_index') }}">Pistas</a>
+							</li>
+							<li>
+								<a href="{{ path('contacto') }}">Contacto</a>
+							</li>
 
-                                {% if is_granted ('ROLE_ADMIN')  %}
-                                    <li><a href="#">Mantenimiento</a>
-                                        <ul class="dropdown">
-                                            {# <li><a href="./classes-details.html">Monitores</a></li> #}
-                                            <li><a href="{{ path('jugador_index') }}">Jugadores</a></li>
-                                            <li><a href="{{ path('club') }}">Clubs</a></li>
-                                            <li><a href="{{ path('deporte_index') }}">Deportes</a></li>
-                                            <li><a href="{{ path('pista_index') }}">Pistas</a></li>
-                                            <li><a href="{{ path('tipo_index') }}">Tipos de Pistas</a></li>
-                                        </ul>
-                                    </li>
-                                {% endif %}
+							{% if is_granted ('ROLE_ADMIN')  %}
+								<li>
+									<a href="#">Mantenimiento</a>
+									<ul
+										class="dropdown">
+										{# <li><a href="./classes-details.html">Monitores</a></li> #}
+										<li>
+											<a href="{{ path('jugador_index') }}">Jugadores</a>
+										</li>
+										<li>
+											<a href="{{ path('club_index') }}">Clubs</a>
+										</li>
+										<li>
+											<a href="{{ path('deporte_index') }}">Deportes</a>
+										</li>
+										<li>
+											<a href="{{ path('pista_index') }}">Pistas</a>
+										</li>
+										<li>
+											<a href="{{ path('tipo_index') }}">Tipos de Pistas</a>
+										</li>
+									</ul>
+								</li>
+							{% endif %}
 
-                                {# <li><a href="./contact.html">Acceso a usuarios</a></li> #}
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-lg-3 col-md-3">
-                        <div class="header__social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End -->
+							{# <li><a href="./contact.html">Acceso a usuarios</a></li> #}
+						</ul>
+					</nav>
+				</div>
+				<div class="col-lg-3 col-md-3">
+					<div class="header__social">
+						<a href="#">
+							<i class="fa fa-facebook"></i>
+						</a>
+						<a href="#">
+							<i class="fa fa-twitter"></i>
+						</a>
+						<a href="#">
+							<i class="fa fa-instagram"></i>
+						</a>
+						<a href="#">
+							<i class="fa fa-linkedin"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<!-- Header Section End -->

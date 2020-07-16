@@ -14,9 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/* @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_CLUB')") */
 /**
  * @Route("/pista")
- * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_CLUB')")
+ *  @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_CLUB')")
  */
 class PistaController extends AbstractController
 {
@@ -29,12 +30,15 @@ class PistaController extends AbstractController
          * @var User $user
          */
         $user = $this->getUser();
+        $pistas = [];
+        if($this->isGranted('ROLE_ADMIN')){
+            $pistas = $pistaRepository->findAll();
+        }
 
         /**
          * @var Club $club
          */
         $club = $user->getClubs();
-        $pistas = [];
         if($club){
             $pistas = $club->getPista();
         }
@@ -48,22 +52,15 @@ class PistaController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        /**
-         * @var User $user
-         */
-        $user = $this->getUser();
-
-        /**
-         * @var Club $club
-         */
-        $club = $user->getClubs();
+       
+        
         $pistum = new Pista();
         $form = $this->createForm(PistaType::class, $pistum);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $club->addPistum($pistum);
+            //$club->addPistum($pistum);
             $entityManager->persist($pistum);
             $entityManager->flush();
 
