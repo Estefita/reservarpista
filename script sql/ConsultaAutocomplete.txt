@@ -1,0 +1,40 @@
+CONSULTA PARA RELLENAR LA TABLA AUTOCOMPLETE PARA LA BÚSQUEDA
+
+INSERT INTO autocomplete (textobusqueda, tipo, admin1code, admin2code, admin3code, admin4code, idclub)
+SELECT name, 'L',admin1Code, null, null, null, null  
+FROM `geoname` 
+WHERE countrycode = 'ES'
+and featureclass = 'A'
+and featurecode = 'ADM1' 
+UNION ALL
+SELECT CONCAT(g1.name,", ",g2.name), 'L', g1.admin1Code, g2.admin2Code, null, null, null
+FROM `geoname` AS g2 JOIN `geoname` AS g1 on g1.countrycode = 'ES' AND
+                                             g1.featureclass = 'A' and 
+                                             g1.featurecode = 'ADM1'		
+                                       
+WHERE g2.countrycode = 'ES'
+and g2.featureclass = 'A'
+and g2.featurecode = 'ADM2'
+and g2.admin1Code = g1.admin1code 
+
+UNION ALL
+SELECT CONCAT(g1.name,", ",g2.name, ', ',g3.name), 'L', g1.admin1Code, g2.admin2Code, g3.admin3Code, null, null
+FROM `geoname` AS g3 JOIN `geoname` AS g1 on g1.countrycode = 'ES' AND
+                                             g1.featureclass = 'A' AND 
+                                             g1.featurecode = 'ADM1'
+                     JOIN `geoname` AS g2 on g2.countrycode = 'ES' AND
+                                             g2.featureclass = 'A' AND 
+                                             g2.featurecode = 'ADM2' AND
+                                             g2.admin1code = g1.admin1code                         WHERE g3.countrycode = 'ES'
+and g3.featureclass = 'A'
+and g3.featurecode = 'ADM3'
+and g3.admin1Code = g1.admin1code
+and g3.admin2Code = g2.admin2code
+
+
+CONSULTA PARA RELLENAR CLUBS
+
+INSERT INTO autocomplete (textobusqueda, tipo, admin1code, admin2code, admin3code,idclub)
+SELECT CONCAT(g1.nomclub,", ",g2.textobusqueda),'C',g2.admin1code,g2.admin2code,g2.admin3code,g1.id FROM `club` AS g1 JOIN `autocomplete` AS g2                                   
+WHERE g1.admin2Code = g2.admin2code 
+and g1.admin3Code = g2.admin3code
