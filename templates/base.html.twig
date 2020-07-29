@@ -28,9 +28,7 @@
     </head>
     <body>
     <header>
-            
-                {% include 'header.html.twig' %}
-           
+        {% include 'header.html.twig' %}
     </header>
     <main>
         {% block body %}{% endblock %}
@@ -42,14 +40,45 @@
     </footer>
        
          <!-- Js Plugins -->
-        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        {# <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> #}
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
         <script src="{{ asset('js/jquery.barfiller.js') }}"></script>
         <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
-         {% block javascripts %}
+        <script src="{{ asset('js/myjs.js')}}"></script>
+{#         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>    
+ #}     
+        {% block javascripts %}
+            <script>
+                $(document).ready(function () {
+                    $("#auComplete").autocomplete({
+                        source: function (request, response) {                    
+                            $.ajax({
+                                url: "/busqueda",                       
+                                method:"POST",
+                                data: {
+                                    texto: $('#auComplete').val()
+                                }
+                            })                   
+                            .done(function( result ) {
+                            response($.map(result.texto, function(item){
+                                // console.log(item);
+                                    return {label: item.textobusqueda, value: item.textobusqueda, admin1code: item.admin1code}
+                            }));    
+                            });
+                        },
+                        minLength: 3,
+                        select: function (event, ui) {
+                            console.log(ui.item);
+                            console.log("Selected: " + ui.item.value + " aka " + ui.item.admin1code);
+                        }   
+                    });
+                });
+            </script>
          {% endblock %}
     </body>
 </html>

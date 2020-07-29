@@ -73,7 +73,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('provincia', TextType::class, [
+           /*  ->add('provincia', TextType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -100,7 +100,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 100,
                     ]),
                 ],
-            ])
+            ]) */
             ->add('telefono', TelType::class, [
                 'mapped' => false,
                 //'attr' => ['style' => 'background: red'],

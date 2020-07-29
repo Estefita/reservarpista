@@ -1,46 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Registrar Club{% endblock %}
 {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
 {% block body %}
-{% include "section/section.html.twig" with {'descripcion':'Registrar Club'} %}
+	{% include "section/section.html.twig" with {'descripcion':'Registrar Club'} %}
 
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-    <div class="row justify-content-center">    
-    <div class="col-6 p-5">
-        <h1 class="text-center">Registrar Club</h1>
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.nomres, {
+	{% for flashError in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+	<div class="row justify-content-center">
+		<div class="col-6 p-5">
+			<h1 class="text-center">Registrar Club</h1>
+			{{ form_start(registrationForm) }}
+			{{ form_row(registrationForm.nomres, {
                 label: 'Nombre responsable:'    
             }) }}
-            {{ form_row(registrationForm.nomclub, {
+			{{ form_row(registrationForm.nomclub, {
                 label: 'Nombre Club:'    
             }) }}
-            {{ form_row(registrationForm.web, {
+			{{ form_row(registrationForm.web, {
                 label: 'Web Club:'    
             }) }}
-            {{ form_row(registrationForm.direccion, {
+			{{ form_row(registrationForm.direccion, {
                 label: 'Dirección:'    
             }) }}
-            {{ form_row(registrationForm.provincia, {
-                label: 'Provincia:'    
-            }) }}
-            {{ form_row(registrationForm.poblacion, {
+			<div class="form-group">
+			<div class="class__filter__select">
+				<label>Comunidad Autónoma</label>
+				<select id="autonomia" onchange="getProvincias()" class="wide" name="admin1code">
+					<option value="">Seleccione Autonomía</option>
+				</select>
+			</div>
+			</div>
+			<div class="form-group">
+			<label>Provincias:</label>
+			<div class="class__filter__select">
+				<select id="provincias" onchange="getPoblacion()" disabled class="wide" name="admin2code">
+					<option value="">Seleccione Provincia</option>
+				</select>
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="class__filter__select">
+				<label>Población:</label>
+				<select id="poblacion" disabled class="wide" name="admin3code">
+					<option value="">Seleccione Poblacion</option>
+				</select>
+			</div>
+			</div>
+			{# {{ form_row(registrationForm.admin2code, {
+						                label: 'Provincia:'    
+						            }) }} 
+			{{ form_row(registrationForm.admin3code, {
                 label: 'Población:'    
-            }) }}
-            {{ form_row(registrationForm.telefono, {
+            }) }} #}
+			{{ form_row(registrationForm.telefono, {
                 label: 'Teléfono:'    
             }) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword, {
+			{{ form_row(registrationForm.email) }}
+			{{ form_row(registrationForm.plainPassword, {
                 label: 'Password'
             }) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+			{{ form_row(registrationForm.agreeTerms) }}
 
-            <button type="submit" class="btn estiloboton btn-block">Registrar</button>
-        {{ form_end(registrationForm) }}
-    </div>
-    </div>
+			<button type="submit" class="btn estiloboton btn-block">Registrar</button>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
+{% endblock %}
+{% block  javascripts %}
+	<script>
+		$(document).ready(function () {
+getComunidades();
+});
+	</script>
 {% endblock %}

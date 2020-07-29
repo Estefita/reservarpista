@@ -45,15 +45,20 @@ class Club
      */
     private $web;
 
-    /**
-     * @ORM\Column(type="string", length=255)
+     /**
+     * @ORM\Column(type="string", length=200, nullable=true)
      */
-    private $provincia;
+    private $admin1code;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $poblacion;
+    private $admin2code;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $admin3code;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="clubs")
@@ -147,26 +152,38 @@ class Club
         return $this;
     }
 
-    public function getProvincia(): ?string
+    public function getAdmin1code(): ?string
     {
-        return $this->provincia;
+        return $this->admin1code;
     }
 
-    public function setProvincia(string $provincia): self
+    public function setAdmin1code(?string $admin1code): self
     {
-        $this->provincia = $provincia;
+        $this->admin1code = $admin1code;
 
         return $this;
     }
 
-    public function getPoblacion(): ?string
+    public function getAdmin2code(): ?string
     {
-        return $this->poblacion;
+        return $this->admin2code;
     }
 
-    public function setPoblacion(string $poblacion): self
+    public function setAdmin2code(string $admin2code): self
     {
-        $this->poblacion = $poblacion;
+        $this->admin2code = $admin2code;
+
+        return $this;
+    }
+
+    public function getAdmin3code(): ?string
+    {
+        return $this->admin3code;
+    }
+
+    public function setAdmin3code(string $admin3code): self
+    {
+        $this->admin3code = $admin3code;
 
         return $this;
     }
@@ -242,14 +259,10 @@ class Club
     {
         $url = 'https://robohash.org/'.$this->getNomres();
 
- 
-
         if ($size) {
             $url .= sprintf('?size=%dx%d', $size, $size);
         }
-
- 
-
         return $url;
     }
+
 }

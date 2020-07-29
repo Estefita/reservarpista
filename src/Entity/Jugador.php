@@ -31,12 +31,16 @@ class Jugador
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $provincia;
+    private $admin1code;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $poblacion;
+    private $admin2code;
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $admin3code;
 
     /**
      * @ORM\Column(type="integer")
@@ -93,30 +97,6 @@ class Jugador
         return $this;
     }
 
-    public function getProvincia(): ?string
-    {
-        return $this->provincia;
-    }
-
-    public function setProvincia(string $provincia): self
-    {
-        $this->provincia = $provincia;
-
-        return $this;
-    }
-
-    public function getPoblacion(): ?string
-    {
-        return $this->poblacion;
-    }
-
-    public function setPoblacion(string $poblacion): self
-    {
-        $this->poblacion = $poblacion;
-
-        return $this;
-    }
-
     public function getTelefono(): ?int
     {
         return $this->telefono;
@@ -161,6 +141,42 @@ class Jugador
     public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    public function getAdmin1code(): ?string
+    {
+        return $this->admin1code;
+    }
+
+    public function setAdmin1code(?string $admin1code): self
+    {
+        $this->admin1code = $admin1code;
+
+        return $this;
+    }
+
+    public function getAdmin2code(): ?string
+    {
+        return $this->admin2code;
+    }
+
+    public function setAdmin2code(string $admin2code): self
+    {
+        $this->admin2code = $admin2code;
+
+        return $this;
+    }
+
+    public function getAdmin3code(): ?string
+    {
+        return $this->admin3code;
+    }
+
+    public function setAdmin3code(string $admin3code): self
+    {
+        $this->admin3code = $admin3code;
 
         return $this;
     }

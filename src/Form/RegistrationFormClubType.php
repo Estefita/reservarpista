@@ -88,7 +88,22 @@ class RegistrationFormClubType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('provincia', TextType::class, [
+
+            /* ->add('admin1code', TextType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Por favor introduzca la CCAA del club',
+                    ]),
+                    new Length([
+                        'min' => 3,
+                        'minMessage' => 'La CCAA debe tener {{ limit }} caracteres',
+                        // max length allowed by Symfony for security reasons
+                        'max' => 100,
+                    ]),
+                ],
+            ])
+            ->add('admin2code', TextType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -102,7 +117,7 @@ class RegistrationFormClubType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('poblacion', TextType::class, [
+            ->add('admin3code', TextType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -115,7 +130,7 @@ class RegistrationFormClubType extends AbstractType
                         'max' => 100,
                     ]),
                 ],
-            ])
+            ]) */
             ->add('telefono', TelType::class, [
                 'mapped' => false,
                 //'attr' => ['style' => 'background: red'],

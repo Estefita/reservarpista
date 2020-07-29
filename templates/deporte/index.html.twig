@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Deporte{% endblock %}
+{% block title %}Deporte
+{% endblock %}
 
 {% block body %}
 	{% include "section/section.html.twig" with {'descripcion':'Deporte'} %}
@@ -27,11 +28,21 @@
 								<td>{{ deporte.fechacreacion ? deporte.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
 								<td>
 									<div class="classes__item__text p-0">
-										<a href="{{ path('deporte_show', {'id': deporte.id}) }}" class="class-btn">Ver</a>
-										<a href="{{ path('deporte_edit', {'id': deporte.id}) }}" class="class-btn">Editar</a>
-										<a href="{{ path('deporte_delete', {'id': deporte.id}) }}" class="class-btn btn-danger">
-											<span class="text-white">Borrar</span>
-										</a>
+										<div class="row">
+											<div class="col-3">
+												<a href="{{ path('deporte_show', {'id': deporte.id}) }}" class="btn btn-sm btn-primary">
+													<i class="fa fa-eye"></i>
+												</a>
+											</div>
+											<div class="col-3">
+												<a href="{{ path('deporte_edit', {'id': deporte.id}) }}" class="btn btn-sm btn-warning">
+													<i class="fa fa-pencil-square-o"></i>
+												</a>
+											</div>
+											<div class="col-3">
+												{{ include('deporte/_delete_form.html.twig') }}
+											</div>
+										</div>
 									</div>
 								</td>
 							</tr>

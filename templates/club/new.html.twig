@@ -1,12 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Club{% endblock %}
+{% block title %}Nuevo Club{% endblock %}
 
 {% block body %}
-{% include "section/section.html.twig" with {'descripcion':'Club'} %}
+{# {% include "section/section.html.twig" with {'descripcion':'Club'} %}
     <h1>Create new Club</h1>
 
     {{ include('club/_form.html.twig') }}
 
-    <a href="{{ path('club_index') }}">back to list</a>
+    <a href="{{ path('club_index') }}">back to list</a> #}
+
+    {% include "section/section.html.twig" with {'descripcion':'Club'} %}
+	<div class="container-fluid p-5">
+		<h3 class="text-center">Crear Nuevo Club</h3>
+		<div class="row justify-content-center">
+			<div class="col-4">
+				{{ include('club/_form.html.twig') }}
+				<div class="classes__item__text pl-0 text-center">
+					<a href="{{ path('club_index') }}" class="class-btn">Volver al listado</a>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

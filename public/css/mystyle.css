@@ -2,3 +2,12 @@ button.estiloboton{
     background-color: #5768AD !important;
     color: white;
 }
+
+ul.list{
+    max-height: 300px;
+    overflow-y: scroll !important;
+}
+
+.nice-select{
+    width: 100%;
+}

@@ -18,7 +18,7 @@ class Contacto
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
     private $nombre;
 
@@ -47,7 +47,7 @@ class Contacto
         return $this->nombre;
     }
 
-    public function setNombre(?string $nombre): self
+    public function setNombre(string $nombre): self
     {
         $this->nombre = $nombre;
 

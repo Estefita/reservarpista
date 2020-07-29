@@ -51,17 +51,23 @@ class RegistrationController extends AbstractController
             $nomres = $form->get('nomres')->getData();
             $nomclub = $form->get('nomclub')->getData();
             $web = $form->get('web')->getData();
+
+          //  dd($request);
+
+
             $direccion = $form->get('direccion')->getData();
-            $provincia = $form->get('provincia')->getData();
-            $poblacion = $form->get('poblacion')->getData();
+            $comunidad = $request->get('admin1code');
+            $provincia = $request->get('admin2code');
+            $poblacion = $request->get('admin3code');
             $telefono = $form->get('telefono')->getData();
 
             $club->setNomres($nomres);
             $club->setNomclub($nomclub);
             $club->setWeb($web);
             $club->setDireccion($direccion);
-            $club->setProvincia($provincia);
-            $club->setPoblacion($poblacion);
+            $club->setAdmin1code($comunidad);
+            $club->setAdmin2code($provincia);
+            $club->setAdmin3code($poblacion);
             $club->setTelefono($telefono);
 
             $user->setRoles(['ROLE_CLUB']);
@@ -142,15 +148,17 @@ class RegistrationController extends AbstractController
             $nombre = $form->get('nombre')->getData();
             $apellidos = $form->get('apellidos')->getData();
             $direccion = $form->get('direccion')->getData();
-            $provincia = $form->get('provincia')->getData();
-            $poblacion = $form->get('poblacion')->getData();
+            $comunidad = $request->get('admin1code');
+            $provincia = $request->get('admin2code');
+            $poblacion = $request->get('admin3code');
             $telefono = $form->get('telefono')->getData();
 
             $jugador->setNombre($nombre);
             $jugador->setApellidos($apellidos);
             $jugador->setDireccion($direccion);
-            $jugador->setProvincia($provincia);
-            $jugador->setPoblacion($poblacion);
+            $jugador->setAdmin1code($comunidad);
+            $jugador->setAdmin2code($provincia);
+            $jugador->setAdmin3code($poblacion);
             $jugador->setTelefono($telefono);
 
             $user->setRoles(['ROLE_JUGADOR']);
