@@ -1,171 +1,219 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Detalle Club{% endblock %}
- {% block body %}
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-    <!-- Header Section End -->
+{% block title %}Detalle Club
+{% endblock %}
+{% block body %}
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+	<!-- Header Section End -->
 
-    <!-- Breadcrumb Begin -->
-        {% include "section/section.html.twig" with {'descripcion':'Detalle Club'} %}
-    <!-- Breadcrumb End -->
+	<!-- Breadcrumb Begin -->
+	{% include "section/section.html.twig" with {'descripcion':'Detalle Club'} %}
+	<!-- Breadcrumb End -->
 
-    <!-- Classes Section Begin -->
-    <section class="classes-details spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="classes__sidebar">
-                        <div class="classes__sidebar__item classes__sidebar__item--info">
-                            <h4>Classes Information</h4>
-                            <ul class="classes__sidebar__item__widget">
-                                <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                                <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                            </ul>
-                            <ul class="classes__sidebar__item__id">
-                                <li><span class="icon_pin_alt"></span> 184 Main Collins Streets, New York</li>
-                                <li><span class="icon_id"></span> Jordan Lawson</li>
-                            </ul>
-                            <a href="#" class="sidebar-btn">JOIN NOW</a>
-                        </div>
-                        <div class="classes__sidebar__item">
-                            <h4>About Instructor</h4>
-                            <div class="classes__sidebar__instructor">
-                                <div class="classes__sidebar__instructor__pic">
-                                    <img src="img/classes-details/classes-instructor.png" alt="">
-                                </div>
-                                <div class="classes__sidebar__instructor__text">
-                                    <div class="classes__sidebar__instructor__title">
-                                        <h4>Tracy Maclaren</h4>
-                                        <span>Yoga Teacher</span>
-                                    </div>
-                                    <p>Yoga & Therapy Certificate of<br /> Uttarakhand University Sanskirt</p>
-                                    <div class="classes__sidebar__instructor__social">
-                                        <a href="#"><span class="social_facebook"></span></a>
-                                        <a href="#"><span class="social_twitter"></span></a>
-                                        <a href="#"><span class="social_instagram"></span></a>
-                                        <a href="#"><span class="social_linkedin"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="classes__sidebar__item">
-                            <h4>Review & Comment</h4>
-                            <div class="classes__sidebar__comment__list">
-                                <div class="classes__sidebar__comment">
-                                    <div class="classes__sidebar__comment__pic">
-                                        <img src="img/classes-details/comment-1.png" alt="">
-                                        <div class="classes__sidebar__comment__rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                    </div>
-                                    <div class="classes__sidebar__comment__text">
-                                        <span>04 Mar 2018</span>
-                                        <h6>Brandon Kelley</h6>
-                                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                                            adipisci velit,</p>
-                                    </div>
-                                </div>
-                                <div class="classes__sidebar__comment">
-                                    <div class="classes__sidebar__comment__pic">
-                                        <img src="img/classes-details/comment-2.png" alt="">
-                                        <div class="classes__sidebar__comment__rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half-o"></i>
-                                        </div>
-                                    </div>
-                                    <div class="classes__sidebar__comment__text">
-                                        <span>04 Mar 2018</span>
-                                        <h6>Christina Kelley</h6>
-                                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="classes__details">
-                        <div class="classes__details__large">
-                            <img src="img/classes-details/cd-large.jpg" alt="">
-                            <span>Beginer</span>
-                        </div>
-                        <ul class="classes__details__widget">
-                            <li><span class="icon_calendar"></span> Mon, Wed, Fri</li>
-                            <li><span class="icon_clock_alt"></span> 18:30 - 19:30</li>
-                        </ul>
-                        <h2>100 Hour Yoga Course Rishikesh</h2>
-                        <p>{{ club.descripcion}}</p>
-                        <div class="classes__details__item">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4">
-                                    <img src="img/classes-details/cd-item-1.jpg" alt="">
-                                </div>
-                                <div class="col-lg-8 col-md-8">
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-6">
-                                            <img src="img/classes-details/cd-item-2.jpg" alt="">
-                                        </div>
-                                        <div class="col-lg-6 col-md-6">
-                                            <img src="img/classes-details/cd-item-3.jpg" alt="">
-                                        </div>
-                                    </div>
-                                    <img src="img/classes-details/cd-item-4.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Classes Section End -->
+	<!-- Classes Section Begin -->
+		<section class="classes-details spad"> <div class="container">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="classes__sidebar">
+						<div class="classes__sidebar__item classes__sidebar__item--info">
+							<h4>Información Club</h4>
+							<ul class="classes__sidebar__item__widget">
+								<li>
+									<span class="icon_calendar"></span>
+									Lunes-Sábado</li>
+								<li>
+									<span class="icon_clock_alt"></span>
+									08:00 - 22:00</li>
+							</ul>
+							<ul class="classes__sidebar__item__id">
+								<li>
+									<span class="icon_pin_alt"></span>
+									{{ club.direccion }}
+								</li>
+								<li>
+									<span class="icon_id"></span>
+									{{ club.nomres }}</li>
+							</ul>
+							<a href="#" class="sidebar-btn">JOIN NOW</a>
+						</div>
+						<div class="classes__sidebar__item">
+							<h4>Sobre el responsable</h4>
+							<div class="classes__sidebar__instructor">
+								<div class="classes__sidebar__instructor__pic">
+									<img src="img/classes-details/classes-instructor.png" alt="">
+								</div>
+								<div class="classes__sidebar__instructor__text">
+									<div class="classes__sidebar__instructor__title">
+										<h4>{{ club.nomres }}</h4>
+										<span>Gerente</span>
+									</div>
+									{# <p>Yoga & Therapy Certificate of<br/>
+																			Uttarakhand University Sanskirt</p> #}
+									<div class="classes__sidebar__instructor__social">
+										<a href="#">
+											<span class="social_facebook"></span>
+										</a>
+										<a href="#">
+											<span class="social_twitter"></span>
+										</a>
+										<a href="#">
+											<span class="social_instagram"></span>
+										</a>
+										<a href="#">
+											<span class="social_linkedin"></span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="classes__sidebar__item">
+							<h4>Review & Comment</h4>
+							<div class="classes__sidebar__comment__list">
+								<div class="classes__sidebar__comment">
+									<div class="classes__sidebar__comment__pic">
+										<img src="img/classes-details/comment-1.png" alt="">
+										<div class="classes__sidebar__comment__rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star-half-o"></i>
+										</div>
+									</div>
+									<div class="classes__sidebar__comment__text">
+										<span>04 Mar 2018</span>
+										<h6>Brandon Kelley</h6>
+										<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+																						                                            adipisci velit,</p>
+									</div>
+								</div>
+								<div class="classes__sidebar__comment">
+									<div class="classes__sidebar__comment__pic">
+										<img src="img/classes-details/comment-2.png" alt="">
+										<div class="classes__sidebar__comment__rating">
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star"></i>
+											<i class="fa fa-star-half-o"></i>
+										</div>
+									</div>
+									<div class="classes__sidebar__comment__text">
+										<span>04 Mar 2018</span>
+										<h6>Christina Kelley</h6>
+										<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="classes__details">
+						<div class="classes__details__large">
+							<img src="img/classes-details/cd-large.jpg" alt="">
+							<span>Beginer</span>
+						</div>
+						<div
+							class="row">
+							{# <div class="container"> #}
+							<h2>Deportes</h2>
+							<p>To make the tabs toggleable, add the data-toggle="tab" attribute to each link. Then add a .tab-pane class with a unique ID for every tab and wrap them inside a div element with class .tab-content.</p>
 
-    <!-- Leave Comment Begin -->
-    {# <div class="leave-comment spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="leave__comment__text">
-                        <h2>Leave A Comment</h2>
-                        <form action="#">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6">
-                                    <input type="text" placeholder="Name*">
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <input type="text" placeholder="Email*">
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="leave__comment__rating">
-                                        <h5>Your Rating:</h5>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12 text-center">
-                                    <textarea placeholder="Your Comment"></textarea>
-                                    <button type="submit" class="site-btn">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> #}
-    <!-- Leave Comment End -->
+							<ul class="nav nav-tabs">
+								{% set active = " in active" %}
+								{% for key in tipodeportes|keys %}
+									<li class="{{active}}">
+										<a data-toggle="tab" href="#tipo{{key}}">{{tipodeportes[key]}}</a>
+									</li>
+									{% set active = "" %}
+								{% endfor %}
+							</ul>
+
+							<div class="tab-content">
+								{% set active = " in active" %}
+								{% for key in tipodeportes|keys  %}
+									<div id="tipo{{key}}" class="tab-pane fade {{active}}">
+										{% for pista in pistas|filter(v=>v.idDeporte == key) %}
+										<div class="pt-5">
+											{{pista.NombrePista}}
+											{{pista.TipoPista}}
+										</div>
+										{% endfor %}
+										{% set active = "" %}
+										<h3>HOME</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+									</div>
+								{% endfor %}
+							</div>
+							{# </div> #}
+						</div>
+
+						<p>{{ club.descripcion}}</p>
+						<div class="classes__details__item">
+							<div class="row">
+								<div class="col-lg-4 col-md-4">
+									<img src="img/classes-details/cd-item-1.jpg" alt="">
+								</div>
+								<div class="col-lg-8 col-md-8">
+									<div class="row">
+										<div class="col-lg-6 col-md-6">
+											<img src="img/classes-details/cd-item-2.jpg" alt="">
+										</div>
+										<div class="col-lg-6 col-md-6">
+											<img src="img/classes-details/cd-item-3.jpg" alt="">
+										</div>
+									</div>
+									<img src="img/classes-details/cd-item-4.jpg" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Classes Section End -->
+
+<!-- Leave Comment Begin -->
+	{# <div class="leave-comment spad">
+		        <div class="container">
+		            <div class="row">
+		                <div class="col-lg-12">
+		                    <div class="leave__comment__text">
+		                        <h2>Leave A Comment</h2>
+		                        <form action="#">
+		                            <div class="row">
+		                                <div class="col-lg-6 col-md-6">
+		                                    <input type="text" placeholder="Name*">
+		                                </div>
+		                                <div class="col-lg-6 col-md-6">
+		                                    <input type="text" placeholder="Email*">
+		                                </div>
+		                                <div class="col-lg-12">
+		                                    <div class="leave__comment__rating">
+		                                        <h5>Your Rating:</h5>
+		                                        <i class="fa fa-star"></i>
+		                                        <i class="fa fa-star"></i>
+		                                        <i class="fa fa-star"></i>
+		                                        <i class="fa fa-star"></i>
+		                                        <i class="fa fa-star"></i>
+		                                    </div>
+		                                </div>
+		                                <div class="col-lg-12 text-center">
+		                                    <textarea placeholder="Your Comment"></textarea>
+		                                    <button type="submit" class="site-btn">Submit</button>
+		                                </div>
+		                            </div>
+		                        </form>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div> #}
+	<!-- Leave Comment End -->
 
 {% endblock %}

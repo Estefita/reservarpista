@@ -8,6 +8,17 @@ ul.list{
     overflow-y: scroll !important;
 }
 
+#auComplete{
+    width: 100% !important;
+}
+
 .nice-select{
     width: 100%;
+}
+
+.formato {
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    height: 40px;
+    padding-left: 15px;
 }

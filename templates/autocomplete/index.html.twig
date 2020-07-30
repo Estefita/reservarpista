@@ -1,7 +1,32 @@
-<div class="ui-widget">
-    <label for="auComplete">Tags:
-    </label>
-    <input id="auComplete">
+<div class="row">
+    <div class="ui-widget col-5">
+        {# <label for="auComplete">
+        </label> #}
+        <input class="formato" id="auComplete">
+    </div>
+
+    <div class="col-2">
+    <select id="horadesde" onchange="validarHora()">
+        {% for i in 8..21 %}
+            <option id="hd{{i}}" value="{{i}}">{{i}}:00</option>
+        {% endfor %}
+    </select>
+
+    </div>
+    <div class="col-2">
+    <select id="horahasta" onchange="validarHora">
+        {% for i in 9..22 %}
+            <option id="hh{{i}}" value="{{i}}">{{i}}:00</option>
+        {% endfor %}
+    </select>
+    </div>
+    <div class="col-2">
+        <input type="text" id="datepicker" class="formato">
+    </div>
+    <div class="col-1">
+        <button class="primary-btn" onclick="buscar()">Buscar</button>
+    </div>
 </div>
+
 
 

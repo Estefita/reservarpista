@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Welcome!{% endblock %}</title>
         
     <meta charset="UTF-8">
@@ -23,6 +24,9 @@
         <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('css/mystyle.css') }}" type="text/css">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
         {% block stylesheets %}{% endblock %}
     </head>
@@ -39,7 +43,9 @@
            
     </footer>
        
-         <!-- Js Plugins -->
+        <!-- Js Plugins -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         {# <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script> #}
@@ -50,35 +56,11 @@
         <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
         <script src="{{ asset('js/myjs.js')}}"></script>
+        <script src="{{ asset('js/autocomplete.js')}}"></script>
 {#         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>    
  #}     
         {% block javascripts %}
-            <script>
-                $(document).ready(function () {
-                    $("#auComplete").autocomplete({
-                        source: function (request, response) {                    
-                            $.ajax({
-                                url: "/busqueda",                       
-                                method:"POST",
-                                data: {
-                                    texto: $('#auComplete').val()
-                                }
-                            })                   
-                            .done(function( result ) {
-                            response($.map(result.texto, function(item){
-                                // console.log(item);
-                                    return {label: item.textobusqueda, value: item.textobusqueda, admin1code: item.admin1code}
-                            }));    
-                            });
-                        },
-                        minLength: 3,
-                        select: function (event, ui) {
-                            console.log(ui.item);
-                            console.log("Selected: " + ui.item.value + " aka " + ui.item.admin1code);
-                        }   
-                    });
-                });
-            </script>
+            
          {% endblock %}
     </body>
 </html>

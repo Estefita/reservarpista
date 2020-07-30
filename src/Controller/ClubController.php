@@ -91,4 +91,5 @@ class ClubController extends AbstractController
 
         return $this->redirectToRoute('club_index');
     }
+
 }

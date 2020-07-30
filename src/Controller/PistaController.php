@@ -31,7 +31,7 @@ class PistaController extends AbstractController
          */
         $user = $this->getUser();
         $pistas = [];
-        if($this->isGranted('ROLE_ADMIN')){
+        if($this->isGranted('ROLE_ADMIN','ROLE_JUGADOR')){
             $pistas = $pistaRepository->findAll();
         }
 

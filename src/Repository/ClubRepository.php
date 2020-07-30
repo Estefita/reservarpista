@@ -47,4 +47,17 @@ class ClubRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function obtenerPistas($idclub){
+        $conn= $this->getEntityManager()->getConnection();
+
+        $sql = "select deporte.id as 'idDeporte',deporte.nombre as 'NombreDeporte',pista.id as 'idPista',pista.nombre as 'NombrePista',pista.tipo_id as 'idTipoPista', tipo.nombre as 'TipoPista' from club JOIN pista on club.id = pista.club_id 
+        join deporte on pista.deporte_id = deporte.id 
+        join tipo on pista.tipo_id = tipo.id
+        where club.id = $idclub group by deporte.id, pista.id, tipo.id";
+
+        $stmt = $conn->prepare($sql);
+        $stmt ->execute();
+        return $stmt->fetchAll();
+    }
 }
