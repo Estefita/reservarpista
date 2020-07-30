@@ -139,8 +139,12 @@
 									<div id="tipo{{key}}" class="tab-pane fade {{active}}">
 										{% for pista in pistas|filter(v=>v.idDeporte == key) %}
 										<div class="pt-5">
+											<img src="{{ pista.Imagen }}" alt="{{pista.NombrePista}}" width="75" height="75"/>
 											{{pista.NombrePista}}
-											{{pista.TipoPista}}
+											{{pista.TipoPista}}	
+											{% for i in 8..21 %}
+            									<option id="hd{{i}}" value="{{i}}">{{i}}:00</option>
+        									{% endfor %}									
 										</div>
 										{% endfor %}
 										{% set active = "" %}

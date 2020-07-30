@@ -7,17 +7,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ClubRepository;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Club;
+use Symfony\Component\HttpFoundation\Request;
 
 class DetallesClubController extends AbstractController
 {
     /**
      * @Route("/detalles/club/{id}", name="detalles_club")
      */
-    public function index(ClubRepository $clubRepository)
+    public function index($id,Request $request, ClubRepository $clubRepository)
     {
-        $idclub = 1;
-        $club = $this->getDoctrine()->getRepository(Club::class)->find($idclub);
-        $pista = $this->getDoctrine()->getRepository(Club::class)->obtenerPistas($idclub);
+        //$idclub = $request->request->get('idclub');
+        $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
+        $pista = $this->getDoctrine()->getRepository(Club::class)->obtenerPistas($id);
         $auxnombre = array_column($pista,"NombreDeporte", "idDeporte");
         $tipodeporte = array_unique($auxnombre);
         //dd($tipodeporte);
@@ -28,16 +29,4 @@ class DetallesClubController extends AbstractController
         ]);
     }
 
-    // /**
-    //  *@Route("/{id}", name="deporte", methods={"GET"})
-    //  */
-    // public function obtenerPistas(ClubRepository $clubRepository): Response
-    // {
-    //     $idclub = 1;
-    //     $pista = $this->getDoctrine()->getRepository(Club::class)->obtenerPistas($idclub);
-    //     dd($pista);
-    //     return $this->render('web/detallesclub.html.twig', [
-    //         'pista' => $pista,
-    //     ]);
-    // }
 }

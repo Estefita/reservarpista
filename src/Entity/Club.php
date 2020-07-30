@@ -81,6 +81,11 @@ class Club
      */
     private $descripcion;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $imagen;
+
     public function __construct()
     {
         $this->fechacreacion = new DateTime();
@@ -263,6 +268,18 @@ class Club
             $url .= sprintf('?size=%dx%d', $size, $size);
         }
         return $url;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?string $imagen): self
+    {
+        $this->imagen = $imagen;
+
+        return $this;
     }
 
 }

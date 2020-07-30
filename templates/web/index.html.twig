@@ -10,7 +10,8 @@
 				{% for club in clubs %}
 					<div class="col-lg-4 col-md-6">
 						<div class="classes__item classes__item__page">
-							<div class="classes__item__pic set-bg" data-setbg="https://www.noticiasparamunicipios.com/wp-content/uploads/2020/01/inacua-1280x720.jpg">
+							<div class="classes__item__pic set-bg" data-setbg="{{ club.imagen }}">
+								{# <img src="{{ club.imagen }}" alt="{{club.nomclub}}" width="75" height="75"/> #}
 								<span>Foto</span>
 							</div>
 							<div class="classes__item__text">

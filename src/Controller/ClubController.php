@@ -33,8 +33,16 @@ class ClubController extends AbstractController
         $club = new Club();
         $form = $this->createForm(ClubType::class, $club);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $admin1code = $request->request->get('admin1code');
+            $admin2code = $request->request->get('admin2code');
+            $admin3code = $request->request->get('admin3code');
+            $club->setAdmin1code($admin1code);
+            $club->setAdmin2code($admin2code);
+            $club->setAdmin3code($admin3code);
+            //dd($request);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($club);
             $entityManager->flush();

@@ -18,9 +18,9 @@ class ClubType extends AbstractType
             ->add('direccion')
             ->add('telefono')
             ->add('web')
-            ->add('admin1code')
+            /* ->add('admin1code')
             ->add('admin2code')
-            ->add('admin3code')
+            ->add('admin3code') */
             /* ->add('fechacreacion') */
             ->add('user')
         ;

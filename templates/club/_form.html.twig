@@ -1,4 +1,31 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+    <div class="form-group">
+			<div class="class__filter__select">
+				<label>Comunidad Autónoma</label>
+				<select id="autonomia" onchange="getProvincias()" class="wide" name="admin1code">
+					<option value="">Seleccione Autonomía</option>
+				</select>
+			</div>
+			</div>
+			<div class="form-group">
+			<label>Provincias:</label>
+			<div class="class__filter__select">
+				<select id="provincias" onchange="getPoblacion()" disabled class="wide" name="admin2code">
+					<option value="">Seleccione Provincia</option>
+				</select>
+			</div>
+			</div>
+			<div class="form-group">
+			<div class="class__filter__select">
+				<label>Población:</label>
+				<select id="poblacion" disabled class="wide" name="admin3code">
+					<option value="">Seleccione Poblacion</option>
+				</select>
+			</div>
+			</div>
     <button class="btn btn-block estiloboton">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}
+<script>
+    var cargarComunidad = true;
+</script>

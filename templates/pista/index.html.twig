@@ -31,7 +31,7 @@
 								<td>{{ pistum.tipo }}</td>
 								<td>{{ pistum.deporte }}</td>
 								<td>{{ pistum.fechacreacion ? pistum.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
-								<td>{{ pistum.imagen }}</td>
+								<td><img src="{{ pistum.imagen }}" alt="{{pistum.nombre}}" width="75" height="75"/></td>
 								<td>
 									<div class="classes__item__text p-0">
 										<div class="row">
