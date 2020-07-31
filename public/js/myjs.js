@@ -6,9 +6,13 @@ $(document).ready(function () {
     
 } */
 
-function validarHora(obj){
+function validarHoraReserva(obj){    
     var obj = $('#horario').find("input:checked");
     console.log(obj.length);     
+    // if(obj.length>2){
+    //     alert("Solo puede seleccionar 2 horas consecutivas");
+    //     $(obj).prop("checked", false);
+    // }
 }
 
 function getComunidades(){

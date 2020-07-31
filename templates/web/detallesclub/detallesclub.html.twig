@@ -150,7 +150,7 @@
 														<div id="horario" class="btn-group" data-toggle="buttons">
 															{% for i in 8..21 %}
 																<label class="btn btn-primary form-check-label m-2">
-																	<input type="checkbox" autocomplete="off" class="form-check-input" value="{{i}}" onchange="validarHora(this)">
+																	<input type="checkbox" autocomplete="off" class="form-check-input" value="{{i}}" onchange="validarHoraReserva(this)">
 																	{{i}}:00
 																</label>
 															{% endfor %}
