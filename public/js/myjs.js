@@ -1,6 +1,15 @@
 $(document).ready(function () {
-  
+  //EventosMyjs();
 });
+
+/* function EventosMyjs(){    
+    
+} */
+
+function validarHora(obj){
+    var obj = $('#horario').find("input:checked");
+    console.log(obj.length);     
+}
 
 function getComunidades(){
     var admin1code = $('#autonomia');

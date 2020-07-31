@@ -43,7 +43,7 @@
 							<h4>Sobre el responsable</h4>
 							<div class="classes__sidebar__instructor">
 								<div class="classes__sidebar__instructor__pic">
-									<img src="img/classes-details/classes-instructor.png" alt="">
+									<img src="/img/classes-details/classes-instructor.png" alt="">
 								</div>
 								<div class="classes__sidebar__instructor__text">
 									<div class="classes__sidebar__instructor__title">
@@ -51,7 +51,7 @@
 										<span>Gerente</span>
 									</div>
 									{# <p>Yoga & Therapy Certificate of<br/>
-																			Uttarakhand University Sanskirt</p> #}
+																																														Uttarakhand University Sanskirt</p> #}
 									<div class="classes__sidebar__instructor__social">
 										<a href="#">
 											<span class="social_facebook"></span>
@@ -74,7 +74,7 @@
 							<div class="classes__sidebar__comment__list">
 								<div class="classes__sidebar__comment">
 									<div class="classes__sidebar__comment__pic">
-										<img src="img/classes-details/comment-1.png" alt="">
+										<img src="/img/classes-details/comment-1.png" alt="foto">
 										<div class="classes__sidebar__comment__rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -87,12 +87,12 @@
 										<span>04 Mar 2018</span>
 										<h6>Brandon Kelley</h6>
 										<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-																						                                            adipisci velit,</p>
+																																																							                                            adipisci velit,</p>
 									</div>
 								</div>
 								<div class="classes__sidebar__comment">
 									<div class="classes__sidebar__comment__pic">
-										<img src="img/classes-details/comment-2.png" alt="">
+										<img src="/img/classes-details/comment-2.png" alt="foto">
 										<div class="classes__sidebar__comment__rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -114,7 +114,7 @@
 				<div class="col-lg-8">
 					<div class="classes__details">
 						<div class="classes__details__large">
-							<img src="img/classes-details/cd-large.jpg" alt="">
+							<img src="{{ club.imagen }}" alt="">
 							<span>Beginer</span>
 						</div>
 						<div
@@ -138,14 +138,26 @@
 								{% for key in tipodeportes|keys  %}
 									<div id="tipo{{key}}" class="tab-pane fade {{active}}">
 										{% for pista in pistas|filter(v=>v.idDeporte == key) %}
-										<div class="pt-5">
-											<img src="{{ pista.Imagen }}" alt="{{pista.NombrePista}}" width="75" height="75"/>
-											{{pista.NombrePista}}
-											{{pista.TipoPista}}	
-											{% for i in 8..21 %}
-            									<option id="hd{{i}}" value="{{i}}">{{i}}:00</option>
-        									{% endfor %}									
-										</div>
+											<div class="pt-5 row">
+												<div class="col-2">
+													<img src="{{ pista.Imagen }}" alt="{{pista.NombrePista}}" width="75" height="75"/>
+												</div>
+												<div class="col-10">
+													<div class="col-12 textopista">
+														{{pista.NombrePista}} - {{pista.TipoPista}}
+													</div>
+													<div class="col-12">
+														<div id="horario" class="btn-group" data-toggle="buttons">
+															{% for i in 8..21 %}
+																<label class="btn btn-primary form-check-label m-2">
+																	<input type="checkbox" autocomplete="off" class="form-check-input" value="{{i}}" onchange="validarHora(this)">
+																	{{i}}:00
+																</label>
+															{% endfor %}
+														</div>
+													</div>
+												</div>
+											</div>
 										{% endfor %}
 										{% set active = "" %}
 										<h3>HOME</h3>
@@ -160,18 +172,18 @@
 						<div class="classes__details__item">
 							<div class="row">
 								<div class="col-lg-4 col-md-4">
-									<img src="img/classes-details/cd-item-1.jpg" alt="">
+									<img src="/img/classes-details/cd-item-1.jpg" alt="">
 								</div>
 								<div class="col-lg-8 col-md-8">
 									<div class="row">
 										<div class="col-lg-6 col-md-6">
-											<img src="img/classes-details/cd-item-2.jpg" alt="">
+											<img src="/img/classes-details/cd-item-2.jpg" alt="">
 										</div>
 										<div class="col-lg-6 col-md-6">
-											<img src="img/classes-details/cd-item-3.jpg" alt="">
+											<img src="/img/classes-details/cd-item-3.jpg" alt="">
 										</div>
 									</div>
-									<img src="img/classes-details/cd-item-4.jpg" alt="">
+									<img src="/img/classes-details/cd-item-4.jpg" alt="">
 								</div>
 							</div>
 						</div>
@@ -184,40 +196,40 @@
 
 <!-- Leave Comment Begin -->
 	{# <div class="leave-comment spad">
-		        <div class="container">
-		            <div class="row">
-		                <div class="col-lg-12">
-		                    <div class="leave__comment__text">
-		                        <h2>Leave A Comment</h2>
-		                        <form action="#">
-		                            <div class="row">
-		                                <div class="col-lg-6 col-md-6">
-		                                    <input type="text" placeholder="Name*">
-		                                </div>
-		                                <div class="col-lg-6 col-md-6">
-		                                    <input type="text" placeholder="Email*">
-		                                </div>
-		                                <div class="col-lg-12">
-		                                    <div class="leave__comment__rating">
-		                                        <h5>Your Rating:</h5>
-		                                        <i class="fa fa-star"></i>
-		                                        <i class="fa fa-star"></i>
-		                                        <i class="fa fa-star"></i>
-		                                        <i class="fa fa-star"></i>
-		                                        <i class="fa fa-star"></i>
-		                                    </div>
-		                                </div>
-		                                <div class="col-lg-12 text-center">
-		                                    <textarea placeholder="Your Comment"></textarea>
-		                                    <button type="submit" class="site-btn">Submit</button>
-		                                </div>
-		                            </div>
-		                        </form>
-		                    </div>
-		                </div>
-		            </div>
-		        </div>
-		    </div> #}
+					        <div class="container">
+					            <div class="row">
+					                <div class="col-lg-12">
+					                    <div class="leave__comment__text">
+					                        <h2>Leave A Comment</h2>
+					                        <form action="#">
+					                            <div class="row">
+					                                <div class="col-lg-6 col-md-6">
+					                                    <input type="text" placeholder="Name*">
+					                                </div>
+					                                <div class="col-lg-6 col-md-6">
+					                                    <input type="text" placeholder="Email*">
+					                                </div>
+					                                <div class="col-lg-12">
+					                                    <div class="leave__comment__rating">
+					                                        <h5>Your Rating:</h5>
+					                                        <i class="fa fa-star"></i>
+					                                        <i class="fa fa-star"></i>
+					                                        <i class="fa fa-star"></i>
+					                                        <i class="fa fa-star"></i>
+					                                        <i class="fa fa-star"></i>
+					                                    </div>
+					                                </div>
+					                                <div class="col-lg-12 text-center">
+					                                    <textarea placeholder="Your Comment"></textarea>
+					                                    <button type="submit" class="site-btn">Submit</button>
+					                                </div>
+					                            </div>
+					                        </form>
+					                    </div>
+					                </div>
+					            </div>
+					        </div>
+					    </div> #}
 	<!-- Leave Comment End -->
 
 {% endblock %}
