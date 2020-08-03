@@ -6,13 +6,42 @@ $(document).ready(function () {
     
 } */
 
-function validarHoraReserva(obj){    
-    var obj = $('#horario').find("input:checked");
-    console.log(obj.length);     
-    // if(obj.length>2){
-    //     alert("Solo puede seleccionar 2 horas consecutivas");
-    //     $(obj).prop("checked", false);
-    // }
+function validarHoraReserva(obj, id){    
+    var allObj = $('#'+id).find("input:checked");
+    console.log(allObj.length);     
+     if(allObj.length>2){
+         alert("Solo puede seleccionar 2 horas consecutivas");
+         $(obj).prop("checked", false);
+         RemoverHorasConsecutivas(id,true);
+     }else if(allObj.length>1){         
+        var chkDesde = $(allObj[0]);
+        var chkHasta = $(allObj[1]);     
+        var valueDesde = chkDesde.val();
+        var valueHasta = chkHasta.val();
+        if(valueHasta-valueDesde>1){
+            alert("Las horas tienen que ser consecutivas");
+            $(chkHasta).prop("checked", false);
+            RemoverHorasConsecutivas(id,true);
+        }
+        else if(allObj.length == 2){
+            RemoverHorasConsecutivas(id,false);         
+        }
+     }
+}
+
+function RemoverHorasConsecutivas(id, soloPista){
+    var auxAllObj = $('#'+id).find(".active");
+    var auxDesde = $(auxAllObj[0]).attr('id');
+    var auxHasta = $(auxAllObj[1]).attr('id');
+    if (soloPista){
+        $('#'+id).find('label[class*=active]').removeClass('active');    
+    }
+    else {
+        $('label[class*=active]').removeClass('active');
+    }
+    
+    $('#'+auxDesde).addClass('active');
+    $('#'+auxHasta).addClass('active');
 }
 
 function getComunidades(){
@@ -90,4 +119,11 @@ function inicializarPoblacion(){
     poblacion.attr('disabled',"disabled");
 
     return poblacion;
+}
+
+function resumenReserva(){
+    $.ajax({
+        type:"POST",
+        url:
+    })
 }

@@ -50,6 +50,11 @@ class Pista
      */
     private $club;
 
+    /**
+     * @ORM\OneToOne(targetEntity=PrecioPista::class, mappedBy="pista", cascade={"persist", "remove"})
+     */
+    private $preciopista;
+
     public function __construct()
     {
         $this->setFechacreacion(new DateTime());
@@ -128,6 +133,23 @@ class Pista
     public function setClub(?Club $club): self
     {
         $this->club = $club;
+
+        return $this;
+    }
+
+    public function getPreciopista(): ?PrecioPista
+    {
+        return $this->preciopista;
+    }
+
+    public function setPreciopista(PrecioPista $preciopista): self
+    {
+        $this->preciopista = $preciopista;
+
+        // set the owning side of the relation if necessary
+        if ($preciopista->getPista() !== $this) {
+            $preciopista->setPista($this);
+        }
 
         return $this;
     }
