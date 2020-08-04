@@ -19,6 +19,7 @@ class DetallesClubController extends AbstractController
         //$idclub = $request->request->get('idclub');
         $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
         $pista = $this->getDoctrine()->getRepository(Club::class)->obtenerPistas($id);
+        //dd($pista);
         $auxnombre = array_column($pista,"NombreDeporte", "idDeporte");
         $tipodeporte = array_unique($auxnombre);
         //dd($tipodeporte);

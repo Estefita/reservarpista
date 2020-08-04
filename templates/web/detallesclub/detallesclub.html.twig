@@ -144,7 +144,7 @@
 												</div>
 												<div class="col-10">
 													<div class="col-12 textopista">
-														{{pista.NombrePista}} - {{pista.TipoPista}}
+														{{pista.NombrePista}} - {{pista.TipoPista}} - {{pista.Precio}}€
 													</div>
 													<div class="col-12">
 														<div id="{{pista.idPista}}" class="btn-group" data-toggle="buttons">															
@@ -169,7 +169,7 @@
 											</div>
 										{% endfor %}
 										{% set active = "" %}
-										<a href="{{ path('resumenreserva') }}" class="class-btn">Reservar</a>
+										{# <a href="{{ path('resumenreserva') }}" class="class-btn">Reservar</a> #}
 										<h3>HOME</h3>
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 									</div>

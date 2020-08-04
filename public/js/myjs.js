@@ -121,9 +121,9 @@ function inicializarPoblacion(){
     return poblacion;
 }
 
-function resumenReserva(){
+/* function resumenReserva(){
     $.ajax({
         type:"POST",
         url:
     })
-}
+} */

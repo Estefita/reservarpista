@@ -50,10 +50,11 @@ class Pista
      */
     private $club;
 
+    
     /**
-     * @ORM\OneToOne(targetEntity=PrecioPista::class, mappedBy="pista", cascade={"persist", "remove"})
+     * @ORM\Column(type="float")
      */
-    private $preciopista;
+    private $precio;
 
     public function __construct()
     {
@@ -137,19 +138,14 @@ class Pista
         return $this;
     }
 
-    public function getPreciopista(): ?PrecioPista
+    public function getPrecio(): ?float
     {
-        return $this->preciopista;
+        return $this->precio;
     }
 
-    public function setPreciopista(PrecioPista $preciopista): self
+    public function setPrecio(float $precio): self
     {
-        $this->preciopista = $preciopista;
-
-        // set the owning side of the relation if necessary
-        if ($preciopista->getPista() !== $this) {
-            $preciopista->setPista($this);
-        }
+        $this->precio = $precio;
 
         return $this;
     }
