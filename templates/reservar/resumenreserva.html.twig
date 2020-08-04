@@ -51,7 +51,7 @@
 										<span>Gerente</span>
 									</div>
 									{# <p>Yoga & Therapy Certificate of<br/>
-																																														Uttarakhand University Sanskirt</p> #}
+																																																							Uttarakhand University Sanskirt</p> #}
 									<div class="classes__sidebar__instructor__social">
 										<a href="#">
 											<span class="social_facebook"></span>
@@ -87,7 +87,7 @@
 										<span>04 Mar 2018</span>
 										<h6>Brandon Kelley</h6>
 										<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-																																																							                                            adipisci velit,</p>
+																																																																		                                            adipisci velit,</p>
 									</div>
 								</div>
 								<div class="classes__sidebar__comment">
@@ -115,11 +115,33 @@
 					<div class="classes__details">
 						<div class="classes__details__large">
 							<img src="{{ club.imagen }}" alt="">
-							<span>Beginer</span>
+							{# <span>Beginer</span> #}
 						</div>
-						<div class="row">
+						<div
+							class="row">
 							{# <div class="container"> #}
-							
+							<table class="table">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Club</th>
+										<th scope="col">Pista</th>
+										<th scope="col">Tipo Pista</th>
+										<th scope="col">Hora</th>
+										<th scope="col">Precio</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for club in clubs %}
+									<tr>
+										<th>1</th>
+										<td>{{ club.nomclub }} Hola</td>
+										<td>{{ club.idpista }}Hola</td>
+										<td>@mdo</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
 							{# </div> #}
 						</div>
 

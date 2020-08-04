@@ -62,13 +62,15 @@
 			<li>
 				<a href="{{ path('contacto_index') }}">Contacto</a>
 			</li>
-
+			
 			{% if is_granted ('ROLE_ADMIN')  %}
 				<li>
 					<a href="#">Mantenimiento</a>
-					<ul
-						class="dropdown">
+					<ul	class="dropdown">
 						{# <li><a href="./classes-details.html">Monitores</a></li> #}
+						<li>
+							<a href="{{ path('app_admin') }}">Registrar cualquier usuario</a>
+						</li>
 						<li>
 							<a href="{{ path('jugador_index') }}">Jugadores</a>
 						</li>
@@ -88,7 +90,7 @@
 				</li>
 			{% endif %}
 
-			{# <li><a href="./contact.html">Acceso a usuarios</a></li> #}
+			{# <li><a href="./contact.html">Acceso a usuarios</a></> #}
 		</ul>
 	</nav>
 	<div class="offcanvas__social">
@@ -192,6 +194,9 @@
 									<ul
 										class="dropdown">
 										{# <li><a href="./classes-details.html">Monitores</a></li> #}
+										<li>
+											<a href="{{ path('app_admin') }}">Registrar cualquier usuario</a>
+										</li>
 										<li>
 											<a href="{{ path('jugador_index') }}">Jugadores</a>
 										</li>

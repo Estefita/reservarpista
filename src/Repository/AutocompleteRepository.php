@@ -52,11 +52,11 @@ class AutocompleteRepository extends ServiceEntityRepository
 
         $conn= $this->getEntityManager()->getConnection();
 
-        $sql = "(SELECT * from autocomplete where tipo = 'L'
+        $sql = "(SELECT * from autocomplete where tipo = 'C'
             AND textobusqueda LIKE :texto
             LIMIT 0,5)
             UNION ALL
-            (SELECT * from autocomplete where tipo = 'C'
+            (SELECT * from autocomplete where tipo = 'L'
             AND textobusqueda LIKE :texto
             LIMIT 0,5)";
 
@@ -64,5 +64,20 @@ class AutocompleteRepository extends ServiceEntityRepository
         $stmt ->execute(['texto'=> "%".$textobusqueda."%"]);
        // dd($stmt->fetchAll());
         return $stmt->fetchAll();
-    }    
+    }   
+    
+    public function insertarclub($idclub){
+        $conn= $this->getEntityManager()->getConnection();
+
+        // insertar clud en autocomplete
+        $insertar = "INSERT INTO autocomplete (textobusqueda, tipo, admin1code, admin2code, admin3code,idclub) 
+        SELECT CONCAT(g1.nomclub ".","." g2.textobusqueda),'C',g2.admin1code,g2.admin2code,g2.admin3code,g1.id FROM club AS g1 JOIN autocomplete AS g2                                   
+        WHERE g1.admin2Code = g2.admin2code 
+        and g1.admin3Code = g2.admin3code 
+        and g1.id=$idclub";
+         
+        $st = $conn->prepare($insertar);
+        $st ->execute();
+        //return $st;
+    }
 }

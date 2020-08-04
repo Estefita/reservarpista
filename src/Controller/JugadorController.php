@@ -35,6 +35,12 @@ class JugadorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $admin1code = $request->request->get('admin1code');
+            $admin2code = $request->request->get('admin2code');
+            $admin3code = $request->request->get('admin3code');
+            $jugador->setAdmin1code($admin1code);
+            $jugador->setAdmin2code($admin2code);
+            $jugador->setAdmin3code($admin3code);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($jugador);
             $entityManager->flush();

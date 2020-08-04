@@ -60,4 +60,6 @@ class ClubRepository extends ServiceEntityRepository
         $stmt ->execute();
         return $stmt->fetchAll();
     }
+
+    
 }

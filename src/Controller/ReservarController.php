@@ -33,7 +33,7 @@ class ReservarController extends AbstractController
         $pista = $this->getDoctrine()->getRepository(Club::class)->obtenerPistas($id);
         return $this->render('reservar/resumenreserva.html.twig', [
             'controller_name' => 'ReservarController',
-            'club' => $club,
+            'clubs' => $club,
             'pistas' => $pista,
         ]);
     }
@@ -49,7 +49,7 @@ class ReservarController extends AbstractController
         }
 
         $realizare = $this->getDoctrine()->getRepository(Reserva::class)->Guardar($reserva);
-        return $this->render('categoria/insertUpdate.html.twig', [
+        return $this->render('reservar/insertUpdate.html.twig', [
             'realizare' => $realizare,
         ]);
     }

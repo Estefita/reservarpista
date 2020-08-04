@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Club;
 use App\Entity\Jugador;
 use App\Entity\User;
+use App\Entity\Autocomplete;
 use App\Form\RegistrationFormType;
 use App\Form\RegistrationFormClubType;
 use App\Security\EmailVerifier;
@@ -79,7 +80,7 @@ class RegistrationController extends AbstractController
             /* $entityManager = $this->getDoctrine()->getManager();*/
             $entityManager->persist($user); 
             $entityManager->flush();
-
+            $this->getDoctrine()->getRepository(Autocomplete::class)->insertarclub($club->getId());
             // generate a signed url and email it to the user
            /*  $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())

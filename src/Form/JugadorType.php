@@ -15,8 +15,8 @@ class JugadorType extends AbstractType
             ->add('nombre')
             ->add('apellidos')
             ->add('direccion')
-            ->add('provincia')
-            ->add('poblacion')
+           /*  ->add('provincia')
+            ->add('poblacion') */
             ->add('telefono')
             /* ->add('fechacreacion') */
             ->add('user')
