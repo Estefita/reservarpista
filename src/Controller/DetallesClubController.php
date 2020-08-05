@@ -22,8 +22,7 @@ class DetallesClubController extends AbstractController
         //dd($pista);
         $auxnombre = array_column($pista,"NombreDeporte", "idDeporte");
         $tipodeporte = array_unique($auxnombre);
-        //dd($tipodeporte);
-        $horasReservadas = array(8, 9, 18, 20,);        
+        $horasReservadas = array();        
         return $this->render('web/detallesclub/detallesclub.html.twig', [
             'pistas' => $pista,
             'club' => $club,

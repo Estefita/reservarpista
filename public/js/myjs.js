@@ -1,10 +1,15 @@
 $(document).ready(function () {
-  //EventosMyjs();
+  EventosMyjs();
 });
 
-/* function EventosMyjs(){    
-    
-} */
+function EventosMyjs(){    
+    $( "#datepicker" ).datepicker({
+        dateFormat: "dd-mm-yy",
+        onSelect: function(date) {
+            setHrefReservas();
+        }
+    });
+}
 
 function validarHoraReserva(obj, id){    
     var allObj = $('#'+id).find("input:checked");
@@ -18,6 +23,7 @@ function validarHoraReserva(obj, id){
         var chkHasta = $(allObj[1]);     
         var valueDesde = chkDesde.val();
         var valueHasta = chkHasta.val();
+
         if(valueHasta-valueDesde>1){
             alert("Las horas tienen que ser consecutivas");
             $(chkHasta).prop("checked", false);
@@ -25,8 +31,27 @@ function validarHoraReserva(obj, id){
         }
         else if(allObj.length == 2){
             RemoverHorasConsecutivas(id,false);         
+            setHrefReservas();
         }
      }
+
+}
+
+
+function setHrefReservas(){    
+    var active = $('label[class*=active]');
+    if (active.length > 0 ){
+        var a= $('#reservaBoton');
+        var urlbase = a.attr('urlbase');
+        $fechaformato= $.datepicker.formatDate('yy-mm-dd',$('#datepicker').datepicker('getDate'));    
+        var checboxs = active.find("input:checked");
+        var id = $(active[0]).attr('id').split('_')[0];    
+        var valueDesde = $(checboxs[0]).val();
+        var valueHasta = $(checboxs[1]).val();
+        if (!valueHasta) valueHasta  = 0;
+        var valuesUrl = urlbase+`?idPista=${id}&desde=${valueDesde}&hasta=${valueHasta}&fechaformato=${$fechaformato}`;
+        a.attr('href', valuesUrl);
+    }    
 }
 
 function RemoverHorasConsecutivas(id, soloPista){

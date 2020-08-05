@@ -132,7 +132,9 @@
 									{% set active = "" %}
 								{% endfor %}
 							</ul>
-
+							 <div>
+								<input type="text" id="datepicker" class="formato" placeholder="Pulse para seleccionar día">
+							</div>
 							<div class="tab-content">
 								{% set active = " in active" %}
 								{% for key in tipodeportes|keys  %}
@@ -158,7 +160,7 @@
 																	{% set onchangeHorareservada = '' %}												
 																{% endif %}
 
-																<label class="btn {{claseHoraReservada}} m-2" id="{{pista.idPista ~ i}}">
+																<label class="btn {{claseHoraReservada}} m-2" id="{{pista.idPista ~ "_" ~ i}}">
 																	<input type="checkbox" autocomplete="off" class="form-check-input" value="{{i}}" {{onchangeHorareservada}}>
 																	{{i}}:00
 																</label>
@@ -169,7 +171,8 @@
 											</div>
 										{% endfor %}
 										{% set active = "" %}
-										<a href="{{ path('resumenreserva', {'id': club.id}) }} " class="class-btn">Reservar</a>
+										
+										<a id="reservaBoton" href="{{ path('resumenreserva', {'id': club.id}) }}" urlbase="{{ path('resumenreserva', {'id': club.id}) }}" class="class-btn">Resumen Reservar</a>
 										<h3>HOME</h3>
 										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 									</div>

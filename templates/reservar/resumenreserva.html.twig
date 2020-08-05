@@ -131,17 +131,20 @@
 										<th scope="col">Precio</th>
 									</tr>
 								</thead>
-								<tbody>
-								{% for club in clubs %}
+								<tbody>															
 									<tr>
-										<th>1</th>
-										<td>{{ club.nomclub }} Hola</td>
-										<td>{{ club.idpista }}Hola</td>
-										<td>@mdo</td>
-									</tr>
-								{% endfor %}
+										<td>{{club.id}}</td>
+										<td>{{club.nomclub}}</td>
+										<td>{{pistas.nombre}}</td>
+										<td>{{pistas.tipo.nombre}}</td>
+										<td>Desde las {{desde}}:00 hasta las {{hasta}}:00</td>
+										<td>{{pistas.precio}}€</td>
+
+									</tr>								
 								</tbody>
 							</table>
+							<button type="submit" class="class-btn">Confirmar reserva</button>
+
 							{# </div> #}
 						</div>
 

@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ClubRepository;
 use App\Entity\Club;
+use App\Entity\Pista;
+use App\Entity\Tipo;
 use App\Entity\Reserva;
 
 class ReservarController extends AbstractController
@@ -28,13 +30,29 @@ class ReservarController extends AbstractController
     /**
      * @Route("/resumenreserva/{id}", name="resumenreserva")
      */
-    public function resumenreserva($id,Request $request, ClubRepository $clubRepository){
+    public function resumenreserva($id, Request $request, ClubRepository $clubRepository){
+        
         $club = $this->getDoctrine()->getRepository(Club::class)->find($id);
-        $pista = $this->getDoctrine()->getRepository(Club::class)->obtenerPistas($id);
+        //$pista = $this->getDoctrine()->getRepository(Club::class)->obtenerPistas($id);
+
+        $idPista = $request->query->get('idPista');
+        $desde = $request->query->get('desde');
+        $hasta = $request->query->get('hasta');
+        $pista = $this->getDoctrine()->getRepository(Pista::class)->find($idPista, $desde,$hasta);
+        //dump($hasta);
+        
+        if($hasta == "" || $hasta == null || $hasta == 0){
+            $hasta = $desde + 1;
+        } else{
+            $hasta = $hasta + 1;    
+        }
         return $this->render('reservar/resumenreserva.html.twig', [
             'controller_name' => 'ReservarController',
-            'clubs' => $club,
+            'club' => $club,
             'pistas' => $pista,
+            'desde' => $desde,
+            'hasta' => $hasta,
+           /*  'tipo' => $tipo, */
         ]);
     }
 
