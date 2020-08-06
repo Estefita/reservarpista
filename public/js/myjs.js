@@ -6,10 +6,14 @@ function EventosMyjs(){
     $( "#datepicker" ).datepicker({
         dateFormat: "dd-mm-yy",
         onSelect: function(date) {
+            hrnodisponible();
             setHrefReservas();
+
         }
     });
 }
+
+
 
 function validarHoraReserva(obj, id){    
     var allObj = $('#'+id).find("input:checked");
@@ -40,33 +44,44 @@ function validarHoraReserva(obj, id){
 
 function setHrefReservas(){    
     var active = $('label[class*=active]');
-    if (active.length > 0 ){
-        var a= $('#reservaBoton');
-        var urlbase = a.attr('urlbase');
-        $fechaformato= $.datepicker.formatDate('yy-mm-dd',$('#datepicker').datepicker('getDate'));    
-        var checboxs = active.find("input:checked");
-        var id = $(active[0]).attr('id').split('_')[0];    
-        var valueDesde = $(checboxs[0]).val();
-        var valueHasta = $(checboxs[1]).val();
-        if (!valueHasta) valueHasta  = 0;
-        var valuesUrl = urlbase+`?idPista=${id}&desde=${valueDesde}&hasta=${valueHasta}&fechaformato=${$fechaformato}`;
-        a.attr('href', valuesUrl);
-    }    
+    if (!active.hasClass('btn-danger')){
+        if (active.length > 0 ){
+            var a= $('#reservaBoton');
+            var urlbase = a.attr('urlbase');
+            $fechareserva= $.datepicker.formatDate('yy-mm-dd',$('#datepicker').datepicker('getDate'));    
+            var checboxs = active.find("input:checked");
+            var id = $(active[0]).attr('id').split('_')[0];    
+            var valueDesde = $(checboxs[0]).val();
+            var valueHasta = $(checboxs[1]).val();
+            if (!valueHasta) valueHasta  = 0;
+            var valuesUrl = urlbase+`?idPista=${id}&desde=${valueDesde}&hasta=${valueHasta}&fechareserva=${$fechareserva}`;       
+            a.attr('href', valuesUrl);
+            console.log(a.attr('href'));
+            console.log(valuesUrl);
+        }    
+    }   
 }
 
 function RemoverHorasConsecutivas(id, soloPista){
     var auxAllObj = $('#'+id).find(".active");
     var auxDesde = $(auxAllObj[0]).attr('id');
     var auxHasta = $(auxAllObj[1]).attr('id');
+    var objDesde;
+    var objHasta; 
     if (soloPista){
         $('#'+id).find('label[class*=active]').removeClass('active');    
     }
     else {
         $('label[class*=active]').removeClass('active');
+        $('input:checked').removeAttr('checked');        
     }
-    
-    $('#'+auxDesde).addClass('active');
-    $('#'+auxHasta).addClass('active');
+    objDesde = $('#'+auxDesde);
+    objHasta = $('#'+auxHasta);
+    objDesde.addClass('active');
+    objHasta.addClass('active');
+    objDesde.find('input').prop('checked',true);
+    objHasta.find('input').prop('checked',true);
+
 }
 
 function getComunidades(){
@@ -146,9 +161,16 @@ function inicializarPoblacion(){
     return poblacion;
 }
 
-/* function resumenReserva(){
+function hrnodisponible(){
+    var idclub = $('#reservaBoton').attr('idclub');
+    var fechareserva= $.datepicker.formatDate('yy-mm-dd',$('#datepicker').datepicker('getDate'));  ;
     $.ajax({
-        type:"POST",
-        url:
-    })
-} */
+        type: "POST",
+        url: "/hrnodisponible",
+        data: {'idclub': idclub , 'fechareserva':fechareserva },
+        dataType: "json",
+        success: function (response) {          
+           console.log(response);
+        }
+    });
+}

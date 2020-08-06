@@ -149,10 +149,13 @@
 														{{pista.NombrePista}} - {{pista.TipoPista}} - {{pista.Precio}}€
 													</div>
 													<div class="col-12">
-														<div id="{{pista.idPista}}" class="btn-group" data-toggle="buttons">															
-															
-															{% for i in 8..21 %}																
-																{% set existeHora = horasReservadas|filter(v=>v==i) %}		
+														<div id="{{pista.idPista}}" class="btn-group" data-toggle="buttons">	
+															{% set horasReservadasPista = [] %}		
+															{% if horasReservadas|length > 0 %}
+																{% set horasReservadasPista = horasReservadas[pista.idPista] %}		
+															{% endif %}
+															{% for i in 8..21 %}																																																
+																{% set existeHora = horasReservadasPista|filter(v=>v==i) %}		
 																{% set claseHoraReservada = "btn-primary form-check-label" %}		
 																{% set onchangeHorareservada = "onchange=validarHoraReserva(this,"~ pista.idPista ~")" %}												
 																{% if existeHora|length > 0 %}
@@ -163,7 +166,7 @@
 																<label class="btn {{claseHoraReservada}} m-2" id="{{pista.idPista ~ "_" ~ i}}">
 																	<input type="checkbox" autocomplete="off" class="form-check-input" value="{{i}}" {{onchangeHorareservada}}>
 																	{{i}}:00
-																</label>
+																</label>																
 															{% endfor %}
 														</div>
 													</div>
@@ -171,12 +174,12 @@
 											</div>
 										{% endfor %}
 										{% set active = "" %}
-										
-										<a id="reservaBoton" href="{{ path('resumenreserva', {'id': club.id}) }}" urlbase="{{ path('resumenreserva', {'id': club.id}) }}" class="class-btn">Resumen Reservar</a>
-										<h3>HOME</h3>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+									
 									</div>
 								{% endfor %}
+								<a id="reservaBoton" href="" urlbase="{{ path('resumenreserva', {'id': club.id}) }}" idclub={{club.id}} class="class-btn">Resumen Reserva</a>
+										{# <h3>HOME</h3>
+										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p> #}
 							</div>		
 							{# </div> #}
 						</div>

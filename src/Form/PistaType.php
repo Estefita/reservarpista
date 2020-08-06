@@ -13,6 +13,7 @@ class PistaType extends AbstractType
     {
         $builder
             ->add('nombre')
+            ->add('precio')
             /* ->add('fechacreacion') */
             ->add('imagen')
             ->add('deporte')

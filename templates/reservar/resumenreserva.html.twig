@@ -37,7 +37,7 @@
 									<span class="icon_id"></span>
 									{{ club.nomres }}</li>
 							</ul>
-							<a href="#" class="sidebar-btn">JOIN NOW</a>
+							<a href="{{ path('detalles_club', {'id': club.id}) }}" class="sidebar-btn">Volver al Detalle Club</a>
 						</div>
 						<div class="classes__sidebar__item">
 							<h4>Sobre el responsable</h4>
@@ -127,6 +127,7 @@
 										<th scope="col">Club</th>
 										<th scope="col">Pista</th>
 										<th scope="col">Tipo Pista</th>
+										<th scope="col">Día</th>
 										<th scope="col">Hora</th>
 										<th scope="col">Precio</th>
 									</tr>
@@ -137,13 +138,20 @@
 										<td>{{club.nomclub}}</td>
 										<td>{{pistas.nombre}}</td>
 										<td>{{pistas.tipo.nombre}}</td>
+										<td>{{fechareserva}}</td>
 										<td>Desde las {{desde}}:00 hasta las {{hasta}}:00</td>
 										<td>{{pistas.precio}}€</td>
 
 									</tr>								
 								</tbody>
 							</table>
-							<button type="submit" class="class-btn">Confirmar reserva</button>
+							<form method="POST" action="{{ path('confirmareserva') }}">
+								<button type="submit" class="class-btn">Confirmar Reserva</button>
+								<input type="hidden" name="desde" value="{{desde}}">
+								<input type="hidden" name="hasta" value="{{hasta}}">
+								<input type="hidden" name="fechareserva" value="{{fechareserva}}">
+							 	<input type="hidden" name="idPista" value="{{idPista}}">
+							</form>
 
 							{# </div> #}
 						</div>
@@ -174,4 +182,16 @@
 	</section>
 	<!-- Classes Section End -->
 
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {
+ 			var mensaje = {{mensaje|json_encode()}};
+			if(mensaje){
+				alert("Reserva realizada con éxito");
+			}
+		});
+		
+	</script>
 {% endblock %}
