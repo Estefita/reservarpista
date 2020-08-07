@@ -64,26 +64,31 @@ class ReservarController extends AbstractController
      * @Route("/confirmareserva", name="confirmareserva")
      */
     public function confirmarReserva(Request $request){
-
+        $mensaje = 2;
         $reserva = new Reserva();            
         $idPista = $request->request->get('idPista');
+        $idclub = $request->request->get('idclub');
         $desde = $request->request->get('desde');
         $hasta = $request->request->get('hasta');
         $fechareserva = $request->request->get('fechareserva');     
+        $pista = $this->getDoctrine()->getRepository(Pista::class)->find($idPista); 
+        $confirmar = $this->getDoctrine()->getRepository(Reserva::class)->ComprobarHoraReservada($idclub, $fechareserva, $desde, $hasta, $idPista);        
+        if(count($confirmar)==0){
 
-        $pista = $this->getDoctrine()->getRepository(Pista::class)->find($idPista);
-        $user = $this->getUser();        
-        $reserva->setHoradesde(\DateTime::createFromFormat('H:i', $desde.":00"));
-        $reserva->setHorahasta(\DateTime::createFromFormat('H:i', $hasta.":00"));
-        $reserva->setFechareserva(\DateTime::createFromFormat('Y-m-d', $fechareserva));
+            $user = $this->getUser();        
+            $reserva->setHoradesde(\DateTime::createFromFormat('H:i', $desde.":00"));
+            $reserva->setHorahasta(\DateTime::createFromFormat('H:i', $hasta.":00"));
+            $reserva->setFechareserva(\DateTime::createFromFormat('Y-m-d', $fechareserva));
 
-        $reserva->setIdclub($pista->getClub()->getId());
-        $reserva->setPrecio($pista->getPrecio());
-        $reserva->setIdusuario($user->getId());
-        $reserva->setEstado(0);
-        $reserva->setIdpista($idPista);
-        $mensaje = true;
-        $realizare = $this->getDoctrine()->getRepository(Reserva::class)->Save($reserva);
+            $reserva->setIdclub($pista->getClub()->getId());
+            $reserva->setPrecio($pista->getPrecio());
+            $reserva->setIdusuario($user->getId());
+            $reserva->setEstado(0);
+            $reserva->setIdpista($idPista);
+            $mensaje = 1;
+            $realizare = $this->getDoctrine()->getRepository(Reserva::class)->Save($reserva);            
+        }
+
         return $this->render('reservar/resumenreserva.html.twig', [
             'controller_name' => 'ReservarController',
             'club' => $pista->getClub(),

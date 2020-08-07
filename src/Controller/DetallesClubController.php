@@ -38,7 +38,9 @@ class DetallesClubController extends AbstractController
     /**
      * @Route("/hrnodisponible", name="app_horareservanodisponible" ,methods={"POST"})
      */
-    public function horaReservaNoDisponible($idclub, $fechareserva ){
+    public function horaReservaNoDisponible(Request $request){
+        $idclub = $request->request->get('idclub');
+        $fechareserva = $request->request->get('fechareserva');
         $list = $this->claseHoraReservada($idclub, $fechareserva);
         return $this->json([
             'list' => $list,

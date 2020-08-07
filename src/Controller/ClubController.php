@@ -42,7 +42,7 @@ class ClubController extends AbstractController
             $club->setAdmin1code($admin1code);
             $club->setAdmin2code($admin2code);
             $club->setAdmin3code($admin3code);
-            dd($club);
+            //dd($club);
             
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($club);

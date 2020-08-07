@@ -8,7 +8,6 @@ function EventosMyjs(){
         onSelect: function(date) {
             hrnodisponible();
             setHrefReservas();
-
         }
     });
 }
@@ -169,8 +168,27 @@ function hrnodisponible(){
         url: "/hrnodisponible",
         data: {'idclub': idclub , 'fechareserva':fechareserva },
         dataType: "json",
-        success: function (response) {          
-           console.log(response);
+        success: function (response) {                     
+           marcarReserva(response);
         }
     });
+}
+
+function marcarReserva(obj){
+    var labels = $('label[class*=btn-danger]');
+    labels.addClass('btn-primary');
+    labels.removeClass('btn-danger');    
+    labels.find('input').prop('checked',false);           
+    Object.keys(obj.list).forEach(pista =>{        
+        horas = obj.list[pista];             
+        $(horas).each(function(index) {
+            var lbl = $('#'+pista+'_'+this)
+            lbl.addClass('btn-danger');
+            lbl.find('input').prop('checked',true);           
+        });                        
+    })    
+}
+
+function vuelta(){   	
+    window.location.replace("reservarpista.com");
 }

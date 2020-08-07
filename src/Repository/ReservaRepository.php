@@ -62,6 +62,26 @@ class ReservaRepository extends ServiceEntityRepository
         return $stmt->fetchAll();
     } 
 
+    public function ComprobarHoraReservada($idclub, $fechareserva, $horadesde, $horahasta, $idpista){
+        $conn= $this->getEntityManager()->getConnection();
+
+        $sql="SELECT p.id, horadesde, horahasta FROM reserva as re
+        JOIN pista as p on re.idpista=p.id
+        JOIN club as c on re.idclub=c.id 
+        where idclub = $idclub
+        and fechareserva = '$fechareserva'
+        and horadesde = '$horadesde'
+        and horahasta = '$horahasta'
+        and idpista = $idpista";
+
+
+        $stmt = $conn->prepare($sql);
+        $stmt ->execute();
+        return $stmt->fetchAll();
+
+
+    } 
+
     public function Save(Reserva $reserva):Reserva {           
         $em = $this->getEntityManager();
         $em->persist($reserva);

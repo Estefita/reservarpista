@@ -146,11 +146,12 @@
 								</tbody>
 							</table>
 							<form method="POST" action="{{ path('confirmareserva') }}">
-								<button type="submit" class="class-btn">Confirmar Reserva</button>
+								<input type="hidden" name="idclub" value="{{club.id}}">
 								<input type="hidden" name="desde" value="{{desde}}">
 								<input type="hidden" name="hasta" value="{{hasta}}">
 								<input type="hidden" name="fechareserva" value="{{fechareserva}}">
 							 	<input type="hidden" name="idPista" value="{{idPista}}">
+								<button type="submit" class="class-btn" onclick="vuelta()">Confirmar Reserva</button>
 							</form>
 
 							{# </div> #}
@@ -188,8 +189,12 @@
 	<script>
 		$(document).ready(function () {
  			var mensaje = {{mensaje|json_encode()}};
-			if(mensaje){
+			if(mensaje==1){
 				alert("Reserva realizada con éxito");
+			}
+			
+			if(mensaje==2){
+				alert("La pista ya está ocupada en esta hora");
 			}
 		});
 		
