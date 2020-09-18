@@ -3,8 +3,7 @@
         {# <label for="auComplete">
         </label> #}
         <input class="formato" id="auComplete">
-    </div>
-
+    </div>    
     <div class="col-2">
     <select id="horadesde" onchange="validarHora()">
         {% for i in 8..21 %}
@@ -20,8 +19,8 @@
         {% endfor %}
     </select>
     </div>
-    <div class="col-2">
-        <input type="text" id="datepicker" class="formato">
+   <div class="col-2">
+        <input type="text" id="datepickerAux" class="formato">
     </div>
     <div class="col-1">
         <button class="primary-btn" onclick="buscar()">Buscar</button>

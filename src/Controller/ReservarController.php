@@ -41,12 +41,14 @@ class ReservarController extends AbstractController
         $hasta = $request->query->get('hasta');
         $fechareserva = $request->query->get('fechareserva');   
         $pista = $this->getDoctrine()->getRepository(Pista::class)->find($idPista);
-        
+                
         if($hasta == "" || $hasta == null || $hasta == 0){
             $hasta = $desde + 1;
         } else{
             $hasta = $hasta + 1;    
         }
+
+        $pista->setPrecio(($hasta - $desde) * $pista->getPrecio());
         return $this->render('reservar/resumenreserva.html.twig', [
             'controller_name' => 'ReservarController',
             'club' => $club,

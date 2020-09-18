@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ContactoRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,11 @@ class Contacto
      * @ORM\Column(type="datetime")
      */
     private $fechacreacion;
+
+    public function __construct()
+    {
+        $this->fechacreacion = new DateTime();
+    }
 
     public function getId(): ?int
     {

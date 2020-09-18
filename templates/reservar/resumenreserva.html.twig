@@ -191,6 +191,7 @@
  			var mensaje = {{mensaje|json_encode()}};
 			if(mensaje==1){
 				alert("Reserva realizada con éxito");
+				window.location.href = "/";
 			}
 			
 			if(mensaje==2){

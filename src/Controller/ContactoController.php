@@ -39,7 +39,9 @@ class ContactoController extends AbstractController
             $entityManager->persist($contacto);
             $entityManager->flush();
 
-            return $this->redirectToRoute('contacto_index');
+           // return $this->redirectToRoute('contacto_index');
+           return $this->render('contacto/enviado.html.twig', [
+            ]);
         }
 
         return $this->render('contacto/new.html.twig', [
