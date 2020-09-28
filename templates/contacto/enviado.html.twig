@@ -1,7 +1,24 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Contacto{% endblock %}
 
 {% block body %}
     <h1>Enviado Correctamente</h1>  
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block body %}
+{% include "section/section.html.twig" with {'descripcion':'Contacto'} %}
+	<div class="container-fluid p-5">
+		<h3 class="text-center">Contacto</h3>
+		<div class="row justify-content-center">
+			<div class="col-4">
+				<h1>Enviado Correctamente</h1>  
+			</div>
+		</div>
+	</div>
+  
 {% endblock %}

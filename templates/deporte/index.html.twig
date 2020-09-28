@@ -24,7 +24,8 @@
 							<tr>
 								<td>{{ deporte.id }}</td>
 								<td>{{ deporte.nombre }}</td>
-								<td>{{ deporte.imagen }}</td>
+								<td><img src="{{ deporte.imagen }}" alt="{{deporte.nombre}}" width="85" height="85"/></td>
+								{# <td>{{ deporte.imagen }}</td> #}
 								<td>{{ deporte.fechacreacion ? deporte.fechacreacion|date('Y-m-d H:i:s') : '' }}</td>
 								<td>
 									<div class="classes__item__text p-0">

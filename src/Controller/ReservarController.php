@@ -10,6 +10,7 @@ use App\Repository\ClubRepository;
 use App\Entity\Club;
 use App\Entity\Pista;
 use App\Entity\Tipo;
+use App\Entity\User;
 use App\Entity\Reserva;
 
 class ReservarController extends AbstractController

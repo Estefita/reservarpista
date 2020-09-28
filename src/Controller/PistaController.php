@@ -49,18 +49,20 @@ class PistaController extends AbstractController
 
     /**
      * @Route("/new", name="pista_new", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_CLUB')")
      */
     public function new(Request $request): Response
     {
-       
-        
         $pistum = new Pista();
         $form = $this->createForm(PistaType::class, $pistum);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            //$club->addPistum($pistum);
+            // $club->addPistum($pistum);
+            $user = $this->getUser();
+            $club = $user->getClubs();
+            $pistum->setClub($club);
             $entityManager->persist($pistum);
             $entityManager->flush();
 
@@ -75,6 +77,7 @@ class PistaController extends AbstractController
 
     /**
      * @Route("/{id}", name="pista_show", methods={"GET"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_CLUB')")
      */
     public function show(Pista $pistum): Response
     {
@@ -85,6 +88,7 @@ class PistaController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="pista_edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_CLUB')")
      */
     public function edit(Request $request, Pista $pistum): Response
     {

@@ -4,7 +4,7 @@
         </label> #}
         <input class="formato" id="auComplete">
     </div>    
-    <div class="col-2">
+   {#  <div class="col-2">
     <select id="horadesde" onchange="validarHora()">
         {% for i in 8..21 %}
             <option id="hd{{i}}" value="{{i}}">{{i}}:00</option>
@@ -18,8 +18,8 @@
             <option id="hh{{i}}" value="{{i}}">{{i}}:00</option>
         {% endfor %}
     </select>
-    </div>
-   <div class="col-2">
+    </div> #}
+   <div class="col-3">
         <input type="text" id="datepickerAux" class="formato">
     </div>
     <div class="col-1">
